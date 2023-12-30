@@ -1,22 +1,51 @@
 ---
 import Layout from "../layouts/Layout.astro";
-import Badge from "../components/Badge.astro";
+// import Badge from "../components/Badge.astro";
+import Badge from "@components/Badge.astro";
+import SocialPill from "@components/SocialPill.astro";
+import GitHubIcon from "@components/icons/GitHub.astro";
+import LinkedInIcon from "@components/icons/LinkedIn.astro";
+import MailIcon from "@components/icons/Mail.astro";
+import Experience from "@components/Experience.astro";
+import ExperienceIcon from "@components/icons/Experience.astro";
+import SectionContainer from "@components/SectionContainer.astro";
 ---
 
 <Layout title="Welcome to Astro.">
 	<main>
-		<section class="w-full mx-auto lg:w-[740px] py-44">
+		<SectionContainer id="top" class="py-44 pb-24">
 			<h1 class="text-white text-5xl font-bold flex flex-grow gap-x-4 pb-10">
-				Hey! Cristian Davila <span>Here</span>
+				Cristian Davila,<span>Here!</span>
 				<div class="flex justify-center items-center">
 					<Badge>Working</Badge>
 				</div>
 			</h1>
-			<h2 class="text-xl">
+			<h2 class="text-2xl opacity-80 text-wrap">
 				A passionate software developer who always thrives to work on end to end
 				products which develop sustainable and scalable social and technical
 				systems to create impact.
 			</h2>
-		</section>
+			<nav class="flex gap-x-4 mt-6">
+				<SocialPill href="https://www.linkedin.com/in/cristiand395/">
+					<LinkedInIcon class="size-6" />
+					 LinkedIn
+				</SocialPill>
+				<SocialPill href="https://github.com/cristiand395">
+					<GitHubIcon class="size-6" />
+					 GitHub
+				</SocialPill>
+				<SocialPill href="mailto:cristiand395@gmail.com">
+					<MailIcon class="size-6" />
+					 cristiand395@gmail.com
+				</SocialPill>
+			</nav>
+		</SectionContainer>
+		<SectionContainer id="experience">
+			<h2 class="text-2xl font-semibold mb-6 flex gap-x-3 items-center">
+				<ExperienceIcon class="size-7" />
+				 Experience
+			</h2>
+			<Experience />
+		</SectionContainer>
 	</main>
 </Layout>

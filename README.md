@@ -38,17 +38,26 @@ Any static assets, like images, can be placed in the `public/` directory.
 
 ## 🧞 Commands
 
+For this projects I've used [Bun](https://bun.sh/docs/installation), its to fast!
+
 All commands are run from the root of the project, from a terminal:
 
 | Command                   | Action                                           |
 | :------------------------ | :----------------------------------------------- |
-| `npm install`             | Installs dependencies                            |
-| `npm run dev`             | Starts local dev server at `localhost:4321`      |
-| `npm run build`           | Build your production site to `./dist/`          |
-| `npm run preview`         | Preview your build locally, before deploying     |
-| `npm run astro ...`       | Run CLI commands like `astro add`, `astro check` |
-| `npm run astro -- --help` | Get help using the Astro CLI                     |
+| `bun install`             | Installs dependencies                            |
+| `bun run dev`             | Starts local dev server at `localhost:4321`      |
+| `bun run build`           | Build your production site to `./dist/`          |
+| `bun run preview`         | Preview your build locally, before deploying     |
+| `bun run astro ...`       | Run CLI commands like `astro add`, `astro check` |
+| `bun run astro -- --help` | Get help using the Astro CLI                     |
 | `bun astro add --list`    | Show some integrations                           | 
+
+## Utilities
+- Font: [Onest](https://fontsource.org/fonts/onest/install)
+- Background: [Dark](https://bg.ibelick.com/) 
+- Tailwind components: [Flowbite](https://flowbite.com/)
+- Icons: [Tablericons](https://tablericons.com/) - [Vercel](https://vercel.com/design/icons) 
+
 
 ## 👀 Want to learn more?
 
