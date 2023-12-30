@@ -1,41 +1,45 @@
 ---
 import Layout from "../layouts/Layout.astro";
-// import Badge from "../components/Badge.astro";
+// Components
 import Badge from "@components/Badge.astro";
-import SocialPill from "@components/SocialPill.astro";
-import GitHubIcon from "@components/icons/GitHub.astro";
-import LinkedInIcon from "@components/icons/LinkedIn.astro";
-import MailIcon from "@components/icons/Mail.astro";
 import Experience from "@components/Experience.astro";
 import ExperienceIcon from "@components/icons/Experience.astro";
+import Footer from "@components/Footer.astro";
 import SectionContainer from "@components/SectionContainer.astro";
+import SocialPill from "@components/SocialPill.astro";
+// Icons
+import GitHubIcon from "@components/icons/GitHub.astro";
+import MailIcon from "@components/icons/Mail.astro";
+import LinkedInIcon from "@components/icons/LinkedIn.astro";
 ---
 
 <Layout title="Welcome to Astro.">
-	<main>
+	<main class="px-4">
 		<SectionContainer id="top" class="py-44 pb-24">
-			<h1 class="text-white text-5xl font-bold flex flex-grow gap-x-4 pb-10">
+			<h1
+				class="text-white text-3xl md:text-4xl lg:text-5xl font-bold flex flex-grow gap-x-4 pb-6 lg:pb-10"
+			>
 				Cristian Davila,<span>Here!</span>
 				<div class="flex justify-center items-center">
 					<Badge>Working</Badge>
 				</div>
 			</h1>
-			<h2 class="text-2xl opacity-80 text-wrap">
+			<h2 class="text-xl lg:text-2xl opacity-80 text-wrap max-w-[700px]">
 				A passionate software developer who always thrives to work on end to end
 				products which develop sustainable and scalable social and technical
 				systems to create impact.
 			</h2>
-			<nav class="flex gap-x-4 mt-6">
+			<nav class="flex gap-x-4 mt-6 flex-wrap">
 				<SocialPill href="https://www.linkedin.com/in/cristiand395/">
-					<LinkedInIcon class="size-6" />
+					<LinkedInIcon class="size-4 lg:size-6" />
 					 LinkedIn
 				</SocialPill>
 				<SocialPill href="https://github.com/cristiand395">
-					<GitHubIcon class="size-6" />
+					<GitHubIcon class="size-4 lg:size-6" />
 					 GitHub
 				</SocialPill>
 				<SocialPill href="mailto:cristiand395@gmail.com">
-					<MailIcon class="size-6" />
+					<MailIcon class="size-4 lg:size-6" />
 					 cristiand395@gmail.com
 				</SocialPill>
 			</nav>
