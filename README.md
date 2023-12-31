@@ -30,5 +30,7 @@ All commands are run from the root of the project, from a terminal:
 - Sections:
   - Experience Timelline ✅
   - Projects 
-- Light and Dark mode switch ✅
+- Light and Dark Mode switch ✅
 - Colors schemes
+- i18n
+  - Spanish

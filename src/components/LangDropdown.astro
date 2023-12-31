@@ -1,0 +1,64 @@
+<div class="custom-dropdown">
+  <div class="dropdown-select flex items-center p-2 rounded-lg">
+    English
+    <svg
+      class="w-2.5 h-2.5 ms-3"
+      aria-hidden="true"
+      xmlns="http://www.w3.org/2000/svg"
+      fill="none"
+      viewBox="0 0 10 6"
+    >
+      <path
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        d="m1 1 4 4 4-4"></path>
+    </svg>
+  </div>
+  <div class="dropdown-options">
+    <div class="dropdown-option">English</div>
+    <div class="dropdown-option">Español</div>
+  </div>
+</div>
+
+<style>
+  .custom-dropdown {
+    position: relative;
+  }
+
+  .dropdown-select {
+    font-size: 16px;
+    cursor: pointer;
+    border: 1px solid #ccc;
+    background-color: transparent;
+  }
+
+  .dropdown-options {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ccc;
+    border-top: none;
+    border-radius: 0 0 4px 4px;
+    overflow: hidden;
+  }
+
+  .dropdown-option {
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+
+  .dropdown-option:hover {
+    background-color: #f0f0f0;
+  }
+
+  /* Mostrar las opciones al hacer hover sobre el dropdown */
+  .custom-dropdown:hover .dropdown-options {
+    display: block;
+  }
+</style>
