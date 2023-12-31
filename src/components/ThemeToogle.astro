@@ -3,7 +3,11 @@ import LightModeIcon from "@components/icons/LightMode.astro";
 import DarkModeIcon from "@components/icons/DarkMode.astro";
 ---
 
-<button id="themeToggle" class="border-0 background-none">
+<button
+  id="themeToggle"
+  class="border-0 background-none"
+  aria-label="Toggle Dark Mode"
+>
   <LightModeIcon class="sun dark:hidden" />
   <DarkModeIcon class="moon hidden dark:block" />
 </button>

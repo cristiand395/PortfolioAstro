@@ -27,6 +27,8 @@ All commands are run from the root of the project, from a terminal:
 
 
 ## TODO:
-- Light and Dark mode switch
-- Colors for schemas
-- Add Projects
+- Sections:
+  - Experience Timelline ✅
+  - Projects 
+- Light and Dark mode switch ✅
+- Colors schemes
