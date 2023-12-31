@@ -65,11 +65,18 @@ const { description, title, url } = Astro.props;
 			scroll-behavior: auto;
 		}
 	}
-	@media (prefers-color-scheme: dark) {
-		/* Agrega las clases específicas para el tema oscuro aquí */
-		/* .dark\:text-purple-500 {
-			--tw-text-opacity: 1;
-			color: rgba(139, 92, 246, var(--tw-text-opacity));
-		} */
+	#header-nav {
+		animation: blur linear both;
+		animation-timeline: scroll();
+		animation-range: 0 500px;
+	}
+	@keyframes blur {
+		to {
+			box-shadow:
+				0px 5px 50px -5px rgba(0, 0, 0, 0.1),
+				0px 0px 0 1px rgba(0, 0, 0, 0.3);
+			background: rgba(0, 0, 0, 0.3);
+			backdrop-filter: blur(5px);
+		}
 	}
 </style>
