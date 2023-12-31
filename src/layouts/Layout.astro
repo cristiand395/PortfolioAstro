@@ -42,6 +42,14 @@ const { title } = Astro.props;
 		font-family: "Onest Variable", sans-serif;
 		scroll-behavior: smooth;
 	}
+	#sun-svg,
+	html[data-theme="dark"] #moon-svg {
+		display: none;
+	}
+	#moon-svg,
+	html[data-theme="dark"] #sun-svg {
+		display: block;
+	}
 	body {
 		background: #050505;
 		display: flex;
