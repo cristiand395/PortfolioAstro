@@ -1,11 +1,17 @@
+---
+import { geti18n } from "@i18n/index";
+const { currentLocale } = Astro;
+const i18n = geti18n({ currentLocale });
+---
+
 <footer
-  class="bg-white rounded-lg shadow m-4 dark:bg-transparent SS w-full xl:w-[1120px] mx-auto px-4"
+  class="bg-white rounded-lg shadow m-4 dark:bg-transparent w-full xl:w-[1120px] mx-auto px-4"
 >
   <div
     class="w-full mx-auto max-w-screen-xl p-4 items-center justify-between flex"
   >
-    <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400"
-      >© 2023. All Rights Reserved.
+    <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
+      {i18n.COPYRIGHT}
     </span>
     <ul
       class="flex flex-wrap items-center text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0"
@@ -14,23 +20,24 @@
         <a
           href="#"
           class="hover:underline me-4 md:me-6"
-          title="Go to Home Section">Home</a
+          title="Go to Home Section"
         >
+          Home
+        </a>
       </li>
       <li>
         <a
           href="#experience"
           class="hover:underline me-4 md:me-6"
-          title="Go to Experience Section">Experience</a
+          title="Go to Experience Section"
         >
+          Experience
+        </a>
       </li>
-      <!-- <li>
-        <a href="#" class="hover:underline me-4 md:me-6">Projects</a>
-      </li> -->
       <li>
-        <a href="#" class="hover:underline" title="Go to Contact Section"
-          >Contact</a
-        >
+        <a href="#" class="hover:underline" title="Go to Contact Section">
+          Contact
+        </a>
       </li>
     </ul>
   </div>

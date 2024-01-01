@@ -27,10 +27,12 @@ All commands are run from the root of the project, from a terminal:
 
 
 ## TODO:
-- Sections:
-  - Experience Timelline ✅
-  - Projects 
-- Light and Dark Mode switch ✅
-- Colors schemes
-- i18n
-  - Spanish
+- [⌛]Sections:
+  - [✅] Experience Timeline
+  - [ ] Projects 
+- [✅] Light and Dark Mode switch
+- [✅]Colors schemes
+- [✅]i18n
+  - [✅]English
+  - [✅]Spanish
+- [⌛] Deploy

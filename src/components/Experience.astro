@@ -1,49 +1,16 @@
 ---
 import ExperienceItem from "./ExperienceItem.astro";
 
-export interface ExperienceData {
-  title: string;
-  description: string[];
-  link?: string;
-  date: string;
-}
-const EXPERIENCE: ExperienceData[] = [
-  {
-    date: "June 2022 - Currently",
-    title: "ERP Manager - Garsaco Import S.L.",
-    description: [
-      "- In Charge of Odoo ERP's.",
-      "- Develop new modules and customizing the existing ones to facilite coworkers experience.",
-      "- Creating reports to measure performance and improve them.",
-      "- Fixing UI and UX issues and creating websites for the company.",
-      "- Training team to improve their skills.",
-    ],
-  },
-  {
-    date: "August 2021 - May 2022",
-    title: "Frontend Developer - Freelance",
-    description: [
-      "- Fixing UI/UX issues from websites.",
-      "- Redesign websites depend on the client needs.",
-    ],
-  },
-  {
-    date: "October 2020 - July 2021",
-    title: "Frontend Developer - Facturadito",
-    description: [
-      " - Develop from scratch an ERP integrated with tax system of the country.",
-      " - UI/UX designed on Adobe XD.",
-      " - Specify new features and functionalities.",
-    ],
-  },
-];
+import { geti18n } from "@i18n/index";
+const { currentLocale } = Astro;
+const i18n = geti18n({ currentLocale });
 ---
 
 <ol class="relative border-s border-gray-200 ml-3">
   {
-    EXPERIENCE.map((ExperienceData) => (
+    i18n.EXPERIENCE_DATA.map((experience) => (
       <li class="mb-10 ms-4">
-        <ExperienceItem {...ExperienceData} />
+        <ExperienceItem {...experience} />
       </li>
     ))
   }

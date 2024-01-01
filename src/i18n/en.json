@@ -1,5 +1,42 @@
 {
   "SEO_TITLE": "Cristian Davila Portfolio",
-  "SEO_DESCRIPTION": "Portfolio to show main info about me with a landing page as fast as possible",
-  "RESUME_TITLE": "Cristian Davila, Here!"
+  "SEO_DESCRIPTION": "Professional information about Cristian Davila",
+  "RESUME_TITLE": "Cristian Davila, Here!",
+  "STATUS_BADGE": "Working",
+  "RESUME_DESCRIPTION": "A passionate software developer who always thrives to work on end to end scalable products and technical systems to create impact people and help team grow on the way.",
+  "EXPERIENCE_TITLE": "Experience",
+  "MENU_HOME": "Home",
+  "MENU_EXPERIENCE": "Experience",
+  "MENU_CONTACT": "Contact",
+  "EXPERIENCE_DATA": [
+    {
+      "DATE": "June 2022 - Present",
+      "TITLE": "ERP Manager - Garsaco Import S.L.",
+      "DESCRIPTIONS": [
+        "- In Charge of Odoo ERP's.",
+        "- Develop new modules and customizing the existing ones to facilite coworkers experience.",
+        "- Creating reports to measure performance and improve them.",
+        "- Fixing UI and UX issues and creating websites for the company.",
+        "- Training team to carry out tasks at short and long term."
+      ]
+    },
+    {
+      "DATE": "August 2021 - May 2022",
+      "TITLE": "Frontend Developer - Freelance",
+      "DESCRIPTIONS": [
+        "- Fixing UI/UX issues from websites.",
+        "- Redesign websites depend on the client needs."
+      ]
+    },
+    {
+      "DATE": "October 2020 - July 2021",
+      "TITLE": "Frontend Developer - Facturadito",
+      "DESCRIPTIONS": [
+        "- Develop from scratch an ERP integrated with tax system of the country.",
+        "- UI/UX designed on Adobe XD.",
+        "- Specify new features and functionalities."
+      ]
+    }
+  ],
+  "COPYRIGHT": "Copyright © 2023. All Rights Reserved."
 }

@@ -13,7 +13,7 @@ import LinkedInIcon from "@components/icons/LinkedIn.astro";
 
 import { geti18n } from "@i18n/index";
 
-const { currentLocale = "en" } = Astro;
+const { currentLocale } = Astro;
 const i18n = geti18n({ currentLocale });
 ---
 
@@ -29,13 +29,11 @@ const i18n = geti18n({ currentLocale });
       >
         {i18n.RESUME_TITLE}
         <div class="flex justify-center items-center">
-          <Badge>Working</Badge>
+          <Badge>{i18n.STATUS_BADGE}</Badge>
         </div>
       </h1>
       <h2 class="text-xl lg:text-2xl opacity-80 text-wrap max-w-[700px]">
-        A passionate software developer who always thrives to work on end to end
-        products which develop sustainable and scalable social and technical
-        systems to create impact and help team grow on the journey.
+        {i18n.RESUME_DESCRIPTION}
       </h2>
       <nav class="flex gap-x-4 mt-6 flex-wrap">
         <SocialPill href="https://www.linkedin.com/in/cristiand395/">
@@ -55,7 +53,7 @@ const i18n = geti18n({ currentLocale });
     <SectionContainer id="experience">
       <h2 class="text-2xl font-semibold mb-6 flex gap-x-3 items-center">
         <ExperienceIcon class="size-7" />
-         Experience
+        {i18n.EXPERIENCE_TITLE}
       </h2>
       <Experience />
     </SectionContainer>

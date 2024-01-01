@@ -1,5 +1,42 @@
 {
-  "SEO_TITLE": "Cristian Davila Portfolio",
-  "SEO_DESCRIPTION": "Portfolio to show main info about me with a landing page as fast as possible",
-  "RESUME_TITLE": "Cristian Davila, Aqui!"
+  "SEO_TITLE": "Cristian Davila Portafolio",
+  "SEO_DESCRIPTION": "Información profesional de Cristian Davila",
+  "RESUME_TITLE": "Cristian Davila, Aquí!",
+  "STATUS_BADGE": "Trabajando",
+  "RESUME_DESCRIPTION": "Desarrollador de Software que siempre se esfuerza en trabajar de inicio a fin en productos escalables y sistemas tecnológicos para crear impacto y ayudar al equipo a crecer en el camino.",
+  "EXPERIENCE_TITLE": "Experiencia",
+  "MENU_HOME": "Home",
+  "MENU_EXPERIENCE": "Experiencia",
+  "MENU_CONTACT": "Contacto",
+  "EXPERIENCE_DATA": [
+    {
+      "DATE": "Junio 2022 - Presente",
+      "TITLE": "ERP Manager - Garsaco Import S.L.",
+      "DESCRIPTIONS": [
+        "- A cargo del sistema ERP Odoo.",
+        "- Desarrollar nuevos módulos y personalizar las existentes para mejorar la experiencia de los colaboradores.",
+        "- Creando informes para medir rendimiento empresarial y mejorarlos.",
+        "- Corregir problemas de interfaz de usuario y crear sitios web para la empresa.",
+        "- Capacitar equipo para llevar a cabo tareas a mediano y largo plazo."
+      ]
+    },
+    {
+      "DATE": "Agosto 2021 - Mayo 2022",
+      "TITLE": "Desarrollador Frontend - Freelance",
+      "DESCRIPTIONS": [
+        "- Corregir problemas de interfaz de usuario de sitios web.",
+        "- Re-diseñar sitios web dependiendo de las necesidades del cliente."
+      ]
+    },
+    {
+      "DATE": "Octubre 2020 - Julio 2021",
+      "TITLE": "Desarrollador Frontend - Facturadito",
+      "DESCRIPTIONS": [
+        "- Desarrollar desde cero un sistema de facturación integrado con el sistema tributario del país.",
+        "- Diseñar interfaces de usuario en Adobe XD.",
+        "- Especificar nuevas funcionalidades."
+      ]
+    }
+  ],
+  "COPYRIGHT": "Copyright © 2023. Todos los derechos reservados."
 }

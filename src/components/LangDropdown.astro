@@ -1,5 +1,11 @@
-<div class="custom-dropdown">
-  <div class="dropdown-select flex items-center p-2 rounded-lg">
+---
+import LangOption from "@components/LangOption.astro";
+---
+
+<div class="custom-dropdown relative">
+  <div
+    class="cursor-pointer background-transparent border border-current flex items-center p-2 rounded-lg text-sm"
+  >
     English
     <svg
       class="w-2.5 h-2.5 ms-3"
@@ -17,23 +23,21 @@
     </svg>
   </div>
   <div class="dropdown-options">
-    <div class="dropdown-option">English</div>
-    <div class="dropdown-option">Español</div>
+    <LangOption />
+    <div
+      class="dropdown-option p-1.5 cursor-pointer hover:bg-purple-200/60 dark:hover:bg-slate-200 dark:hover:text-black"
+    >
+      English
+    </div>
+    <div
+      class="dropdown-option p-1.5 cursor-pointer hover:bg-purple-200/60 dark:hover:bg-slate-200 dark:hover:text-black"
+    >
+      Español
+    </div>
   </div>
 </div>
 
 <style>
-  .custom-dropdown {
-    position: relative;
-  }
-
-  .dropdown-select {
-    font-size: 16px;
-    cursor: pointer;
-    border: 1px solid #ccc;
-    background-color: transparent;
-  }
-
   .dropdown-options {
     display: none;
     position: absolute;
@@ -48,17 +52,12 @@
   }
 
   .dropdown-option {
-    padding: 10px;
-    cursor: pointer;
     transition: background-color 0.3s;
-  }
-
-  .dropdown-option:hover {
-    background-color: #f0f0f0;
   }
 
   /* Mostrar las opciones al hacer hover sobre el dropdown */
   .custom-dropdown:hover .dropdown-options {
     display: block;
+    color:;
   }
 </style>
