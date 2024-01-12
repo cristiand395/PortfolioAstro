@@ -3,11 +3,13 @@
   "SEO_DESCRIPTION": "Professional information about Cristian Davila",
   "RESUME_TITLE": "Cristian Davila, Here!",
   "STATUS_BADGE": "Working",
+  "MENU": {
+    "HOME": "Home",
+    "EXPERIENCE": "Experience",
+    "CONTACT": "Contact"
+  },
   "RESUME_DESCRIPTION": "A passionate software developer who always thrives to work on end to end scalable products and technical systems to create impact people and help team grow on the way.",
   "EXPERIENCE_TITLE": "Experience",
-  "MENU_HOME": "Home",
-  "MENU_EXPERIENCE": "Experience",
-  "MENU_CONTACT": "Contact",
   "EXPERIENCE_DATA": [
     {
       "DATE": "June 2022 - Present",
@@ -38,5 +40,5 @@
       ]
     }
   ],
-  "COPYRIGHT": "Copyright © 2023. All Rights Reserved."
+  "COPYRIGHT": "Copyright © 2023."
 }

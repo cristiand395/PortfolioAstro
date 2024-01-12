@@ -1,13 +1,15 @@
 {
   "SEO_TITLE": "Cristian Davila Portafolio",
   "SEO_DESCRIPTION": "Información profesional de Cristian Davila",
-  "RESUME_TITLE": "Cristian Davila, Aquí!",
+  "RESUME_TITLE": "Hola! soy Cristian Davila",
   "STATUS_BADGE": "Trabajando",
   "RESUME_DESCRIPTION": "Desarrollador de Software que siempre se esfuerza en trabajar de inicio a fin en productos escalables y sistemas tecnológicos para crear impacto y ayudar al equipo a crecer en el camino.",
+  "MENU": {
+    "HOME": "Inicio",
+    "EXPERIENCE": "Experiencia",
+    "CONTACT": "Contacto"
+  },
   "EXPERIENCE_TITLE": "Experiencia",
-  "MENU_HOME": "Home",
-  "MENU_EXPERIENCE": "Experiencia",
-  "MENU_CONTACT": "Contacto",
   "EXPERIENCE_DATA": [
     {
       "DATE": "Junio 2022 - Presente",
@@ -38,5 +40,5 @@
       ]
     }
   ],
-  "COPYRIGHT": "Copyright © 2023. Todos los derechos reservados."
+  "COPYRIGHT": "Copyright © 2023."
 }

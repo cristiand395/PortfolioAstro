@@ -1,36 +1,41 @@
 ---
 import ThemeToogle from "@components/ThemeToogle.astro";
-import LanguageDropdown from "@components/LanguageDropdown.astro";
+import LanguageSelector from "@components/LanguageSelector.astro";
+import { geti18n } from "@i18n/index";
+const { currentLocale } = Astro;
+const i18n = geti18n({ currentLocale });
 ---
 
 <header
   id="header-nav"
   class="flex fixed z-50 top-0 justify-between items-center py-5 w-full mx-auto px-4"
 >
-  <div
-    class="w-full mx-auto max-w-screen-xl p-4 items-center justify-between flex"
-  >
+  <div class="w-full mx-auto max-w-screen-xl items-center justify-between flex">
     <img
       class="rounded-full w-12 h-12"
       src="https://avatars.githubusercontent.com/u/7496040?s=96&v=4"
       alt="Cristian Davila Photo"
     />
     <nav>
-      <ul class="flex flex-row gap-x-10 opacity-80 display-none sm:flex">
+      <ul class="flex flex-row gap-x-5 opacity-80 display-none sm:flex">
         <li class="flex items-center">
-          <a href="#top" title="Go to Home">Home</a>
+          <a href="#top" title="Go to Home">{i18n.MENU.HOME}</a>
         </li>
         <li class="flex items-center">
-          <a href="#experience" title="Go to Experience Section">Experience</a>
+          <a href="#experience" title="Go to Experience Section"
+            >{i18n.MENU.EXPERIENCE}</a
+          >
         </li>
         <li class="flex items-center">
-          <a href="#contact" title="Go to Contact Section">Contact</a>
+          <a href="#contact" title="Go to Contact Section"
+            >{i18n.MENU.CONTACT}</a
+          >
         </li>
         <li class="flex items-center">
           <ThemeToogle />
         </li>
-        <li class="flex items-center">
-          <LanguageDropdown />
+        <li>
+          <LanguageSelector />
         </li>
       </ul>
     </nav>
