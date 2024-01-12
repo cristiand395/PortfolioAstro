@@ -1,4 +1,6 @@
 # Portfolio
+![Portfolio Screenshot](./public/screenshot.webp)
+
 
 ## 🧞 Commands
 
