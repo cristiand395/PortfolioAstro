@@ -11,21 +11,27 @@ const { DATE, TITLE, DESCRIPTIONS } = Astro.props;
 
 <ThemeSwitch>
   <div
-    class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 -start-1.5 border border-white dark:border-gray-900"
+    class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 point border border-white dark:border-gray-900"
   >
   </div>
   <time
-    class="mb-1 text-sm font-normal leading-none text-gray-400 dark:text-gray-500"
+    class="mb-1 text-sm font-normal leading-none text-gray-500 dark:text-gray-500"
     >{DATE}</time
   >
-  <h3 class="text-xl font-semibold text-rose-700 dark:text-violet-400 my-1">
+  <h3 class="text-xl font-semibold text-violet-600 dark:text-violet-400 my-1">
     {TITLE}
   </h3>
   {
     DESCRIPTIONS.map((item) => (
-      <p class="mb-1 text-base font-normal text-gray-500 dark:text-gray-400 text-pretty">
+      <p class="mb-1 text-base font-normal text-gray-600 dark:text-gray-400 text-pretty">
         {item}
       </p>
     ))
   }
 </ThemeSwitch>
+
+<style>
+  .point {
+    inset-inline-start: -0.4rem;
+  }
+</style>
