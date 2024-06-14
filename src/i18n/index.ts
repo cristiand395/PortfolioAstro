@@ -1,5 +1,5 @@
-import english from "@i18n/en.json"
-import spanish from "@i18n/es.json"
+import * as english from "@i18n/en.json"
+import * as spanish from "@i18n/es.json"
 
 export const geti18n = (
   { currentLocale = "en" }:

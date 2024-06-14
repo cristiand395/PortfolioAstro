@@ -1,7 +1,6 @@
 ---
 import Layout from "../layouts/Layout.astro";
 // Components
-import Badge from "@components/Badge.astro";
 import Experience from "@components/Experience.astro";
 import ExperienceIcon from "@components/icons/Experience.astro";
 import SectionContainer from "@components/SectionContainer.astro";
@@ -28,9 +27,6 @@ const i18n = geti18n({ currentLocale });
         class="dark:text-white text-4xl md:text-5xl font-bold flex flex-grow gap-x-4 pb-4"
       >
         {i18n.RESUME_TITLE}
-        <!-- <div class="flex justify-center items-center">
-          <Badge>{i18n.STATUS_BADGE}</Badge>
-        </div> -->
       </h1>
       <h2
         class="text-md md:text-xl opacity-80 text-wrap max-w-[700px] leading-7"

@@ -20,5 +20,6 @@
         "name": "@astrojs/ts-plugin"
       },
     ],
-  }
+  },
+  "allowSyntheticDefaultImports": true
 }
