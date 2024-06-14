@@ -10,4 +10,8 @@ export default {
 		},
 	},
 	plugins: [],
+	purge: {
+		mode: 'all',
+		preserveHtmlElements: false
+	},
 }
