@@ -36,7 +36,7 @@ const currentPath = url.pathname.replace(currentLocaleData.href, "");
   <div class="group">
     <button
       type="button"
-      class="cursor-pointer background-transparent border border-current flex items-center p-2 rounded-lg text-xs sm:text-base"
+      class="cursor-pointer bg-transparent border border-current flex items-center p-2 rounded-lg text-xs sm:text-base"
       aria-expanded="true"
       aria-haspopup="true"
     >
@@ -57,13 +57,13 @@ const currentPath = url.pathname.replace(currentLocaleData.href, "");
       </svg>
     </button>
     <ul
-      class="group-hover:block group-hover:animate-fade-down group-hover:animate-duration-200 cursor-pointer background-transparent border absolute border-current rounded-lg text-sm w-full overflow-hidden hidden"
+      class="group-hover:block group-hover:animate-fade-down group-hover:animate-duration-200 cursor-pointer bg-transparent border absolute border-current rounded-lg text-sm w-full overflow-hidden hidden"
     >
       {
         otherLocales.map((locale) => (
           <li class="hover:bg-purple-200/60 dark:hover:bg-slate-200 dark:hover:text-black overflow-hidden flex align-middle">
             <a
-              class="rounded-md whitespace-no-wrap inline-flex w-full text-center m-2 text-xs sm:text-base"
+              class="rounded-md whitespace-nowrap inline-flex w-full text-center m-2 text-xs sm:text-base"
               href={`${locale.href}`}
             >
               <locale.name />

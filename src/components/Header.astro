@@ -8,7 +8,7 @@ const i18n = geti18n({ currentLocale });
 
 <header
   id="header-nav"
-  class="flex fixed z-50 top-0 justify-between items-center py-5 w-full mx-auto px-4"
+  class="flex fixed z-[50] top-[0] justify-between items-center py-5 w-full mx-auto px-4"
 >
   <div class="w-full mx-auto max-w-screen-xl items-center justify-between flex">
     <img
@@ -17,9 +17,7 @@ const i18n = geti18n({ currentLocale });
       alt="Cristian Davila"
     />
     <nav>
-      <ul
-        class="flex flex-row gap-x-4 md:gap-6 opacity-80 display-none sm:flex"
-      >
+      <ul class="flex flex-row gap-x-4 md:gap-6 opacity-80 hidden sm:flex">
         <li class="flex items-center">
           <a class="text-md md:text-base" href="#top" title="Go to Home"
             >{i18n.MENU.HOME}</a
