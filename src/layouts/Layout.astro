@@ -55,7 +55,9 @@ const { description, title, url } = Astro.props;
 		display: block;
 	}
 	body {
-		background: #050505;
+		/* Let Tailwind control the background with utility classes (e.g. dark:bg-...)
+		   Removing the hard-coded background fixes cases where `dark:` utilities
+		   appear to have no effect because a stronger rule overrides them. */
 		display: flex;
 		flex-direction: column;
 		justify-content: center;
