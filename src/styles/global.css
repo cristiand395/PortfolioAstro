@@ -1,0 +1,4 @@
+@import '@fontsource-variable/onest';
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));

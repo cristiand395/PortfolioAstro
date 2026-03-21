@@ -1,16 +1,5 @@
 ---
-const { currentLocale = "/", url } = Astro;
-
-const pathname = url.pathname;
-
-let restUrl;
-
-if (pathname.startsWith("/es")) {
-  const segments = pathname.split("/").slice(2);
-  restUrl = "/" + segments.join("/").replace(/\/+$/, "");
-} else {
-  restUrl = pathname.replace(/\/+$/, "");
-}
+const { currentLocale = "/" } = Astro;
 
 const LOCALES: Record<string, { code: string; name: string; href: string }> = {
   en: {
@@ -29,7 +18,6 @@ const currentLocaleData = LOCALES[currentLocale];
 const otherLocales = Object.values(LOCALES).filter(
   (locale) => locale.code !== currentLocale,
 );
-const currentPath = url.pathname.replace(currentLocaleData.href, "");
 ---
 
 <div class="relative inline-block text-left">
@@ -66,7 +54,6 @@ const currentPath = url.pathname.replace(currentLocaleData.href, "");
               class="rounded-md whitespace-nowrap inline-flex w-full text-center m-2 text-xs sm:text-base"
               href={`${locale.href}`}
             >
-              <locale.name />
               {locale.name}
             </a>
           </li>

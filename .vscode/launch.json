@@ -2,8 +2,14 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "command": "./node_modules/.bin/astro dev",
-      "name": "Development server",
+      "command": "docker compose up --build app",
+      "name": "Docker Compose: Dev",
+      "request": "launch",
+      "type": "node-terminal"
+    },
+    {
+      "command": "docker compose up --build portfolio",
+      "name": "Docker Compose: Preview",
       "request": "launch",
       "type": "node-terminal"
     }

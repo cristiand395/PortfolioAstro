@@ -1,6 +1,9 @@
 {
+  "extends": "astro/tsconfigs/strict",
   "compilerOptions": {
     "baseUrl": ".",
+    "allowSyntheticDefaultImports": true,
+    "resolveJsonModule": true,
     "paths": {
       "@components/*": [
         "src/components/*"
@@ -14,12 +17,6 @@
       "@i18n/*": [
         "src/i18n/*"
       ]
-    },
-    "plugins": [
-      {
-        "name": "@astrojs/ts-plugin"
-      },
-    ],
-  },
-  "allowSyntheticDefaultImports": true
+    }
+  }
 }

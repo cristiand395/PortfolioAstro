@@ -23,8 +23,6 @@ pnpm-debug.log*
 # macOS-specific files
 .DS_Store
 
-# lock files
-package-lock.json
+# alternative lock files
 yarn.lock
 pnpm-lock.yaml
-bun.lockb
