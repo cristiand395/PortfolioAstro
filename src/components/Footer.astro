@@ -8,7 +8,7 @@ const i18n = geti18n({ currentLocale });
 const links = [
   { href: "https://github.com/cristiand395", label: "GitHub", Icon: GitHubIcon },
   { href: "https://www.linkedin.com/in/cristiand395/", label: "LinkedIn", Icon: LinkedInIcon },
-  { href: "mailto:cristiand395@gmail.com", label: "cristiand395@gmail.com", Icon: MailIcon },
+  { href: "mailto:cristiand395@gmail.com", label: i18n.CONTACT.MAIL, Icon: MailIcon },
 ];
 ---
 
@@ -27,9 +27,9 @@ const links = [
               href={href}
               target={href.startsWith("http") ? "_blank" : undefined}
               rel="noopener noreferrer"
-              class="flex min-h-11 items-center gap-2 rounded-full border-2 border-white px-5 py-2.5 font-mono text-sm transition hover:bg-white hover:text-ink"
+              class="flex h-12 items-center gap-2 rounded-full border-2 border-white px-5 font-mono text-sm transition hover:bg-white hover:text-ink"
             >
-              <Icon class="size-5" />
+              <Icon class="size-5 shrink-0" />
               {label}
             </a>
           </li>
