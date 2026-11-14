@@ -1,18 +1,40 @@
 ---
-import ExperienceItem from "./ExperienceItem.astro";
+import ExperienceItem from './ExperienceItem.astro';
 
-import { geti18n } from "@i18n/index";
+import { geti18n } from '@i18n/index';
 const { currentLocale } = Astro;
 const i18n = geti18n({ currentLocale });
+
+// Años completos desde START ("AAAA-MM") hasta hoy.
+// shortcut: se calcula al construir la web, así que solo cambia con cada despliegue; basta para años.
+const plural = new Intl.PluralRules(currentLocale ?? 'en');
+const yearsSince = (start: string) => {
+  const [year, month] = start.split('-').map(Number);
+  const now = new Date();
+  const years = Math.floor(
+    (now.getFullYear() * 12 + now.getMonth() + 1 - (year * 12 + month)) / 12,
+  );
+  const forms = i18n.EXPERIENCE_YEARS;
+  return (plural.select(years) === 'one' ? forms.one : forms.other).replace(
+    '{n}',
+    String(years),
+  );
+};
 ---
 
 <!-- La experiencia como un riel vertical: el trabajo actual arriba, en naranja. -->
 <ol class="relative ml-3 border-s-4 border-rail">
-  {
-    i18n.EXPERIENCE_DATA.map((experience, index) => (
-      <li class="mb-10 ms-8">
-        <ExperienceItem {...experience} current={index === 0} />
-      </li>
-    ))
-  }
+  {i18n.EXPERIENCE_DATA.map((experience, index) => (
+    <li class="mb-10 ms-8">
+      <ExperienceItem
+        {...experience}
+        current={index === 0}
+        duration={
+          'START' in experience && experience.START
+            ? yearsSince(experience.START)
+            : undefined
+        }
+      />
+    </li>
+  ))}
 </ol>

@@ -64,12 +64,15 @@
       "DATE": "June 2022 - Present",
       "TITLE": "ERP Manager - Garsaco Import S.L.",
       "DESCRIPTIONS": [
-        "- In Charge of Odoo ERP's.",
-        "- Develop new modules and customizing the existing ones to facilite coworkers experience.",
-        "- Creating reports to measure performance and improve them.",
-        "- Fixing UI and UX issues and creating websites for the company.",
-        "- Training team to carry out tasks at short and long term."
-      ]
+        "- I lead the development team: priorities, code review and training.",
+        "- I design the architecture and integrations between the Odoo ERP, the online shops and internal processes.",
+        "- I build and maintain custom Odoo modules for the company's day-to-day work.",
+        "- I set up CI/CD pipelines to test and deploy automatically and safely.",
+        "- I build MCP servers to connect AI agents with the company's systems.",
+        "- I build dashboards on business data to support decision-making.",
+        "- I run code and security audits before changes reach production."
+      ],
+      "START": "2022-06"
     },
     {
       "DATE": "August 2021 - May 2022",
@@ -88,5 +91,9 @@
         "- Specify new features and functionalities."
       ]
     }
-  ]
+  ],
+  "EXPERIENCE_YEARS": {
+    "one": "{n} year",
+    "other": "{n} years"
+  }
 }
