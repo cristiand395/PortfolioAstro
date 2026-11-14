@@ -42,6 +42,8 @@ h3 {
   background:
     linear-gradient(180deg, rgb(255 255 255 / 0.14), rgb(255 255 255 / 0.04)),
     rgb(16 14 26 / 0.35);
+  /* Prefijo para Safari anterior a la 18 (iOS 17 y antes): sin él no hay desenfoque. */
+  -webkit-backdrop-filter: blur(16px) saturate(180%);
   backdrop-filter: blur(16px) saturate(180%);
   box-shadow:
     inset 0 1px 0 rgb(255 255 255 / 0.4),
