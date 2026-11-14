@@ -1,0 +1,22 @@
+# Revisión de calidad en cada push y PR. Corre aparte del despliegue de Vercel:
+# no lo bloquea (así el build de producción tarda menos), pero avisa si algo se rompe.
+name: Revisión
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+
+jobs:
+  revision:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - run: npm ci
+      - run: npm run check
+      - run: npm run lint
+      - run: npm test
