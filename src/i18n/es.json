@@ -2,8 +2,8 @@
   "SEO_TITLE": "Cristian Davila · Arquitecto de IA agéntica",
   "SEO_DESCRIPTION": "Portfolio de Cristian Davila: agentes, integraciones y servidores MCP, contados como un cielo de estrellas.",
   "MENU": {
-    "SKY": "Cielo",
-    "CONSTELLATIONS": "Constelaciones",
+    "SKY": "Inicio",
+    "CONSTELLATIONS": "Qué hago",
     "EXPERIENCE": "Experiencia",
     "CONTACT": "Contacto"
   },
@@ -63,7 +63,7 @@
     }
   ],
   "SKY": {
-    "TITLE": "Constelaciones",
+    "TITLE": "Qué hago",
     "TYPES": {
       "faceta": "Oficio",
       "repo": "Proyecto",

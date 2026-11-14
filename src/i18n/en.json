@@ -2,8 +2,8 @@
   "SEO_TITLE": "Cristian Davila · Agentic AI Architect",
   "SEO_DESCRIPTION": "Cristian Davila portfolio: agents, integrations and MCP servers, told as a sky full of stars.",
   "MENU": {
-    "SKY": "Sky",
-    "CONSTELLATIONS": "Constellations",
+    "SKY": "Home",
+    "CONSTELLATIONS": "What I do",
     "EXPERIENCE": "Experience",
     "CONTACT": "Contact"
   },
@@ -63,7 +63,7 @@
     }
   ],
   "SKY": {
-    "TITLE": "Constellations",
+    "TITLE": "What I do",
     "TYPES": {
       "faceta": "Craft",
       "repo": "Project",
