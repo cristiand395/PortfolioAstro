@@ -1,37 +1,59 @@
 import * as THREE from 'three';
 
-export type Phase = { id: string; active: boolean };
+/** Lo que la escena necesita de cada estrella: a qué constelación pertenece y cuánto brilla (1 a 3). */
+export type StarData = { constellation: number; brightness: number; color: string };
 
-// Encuadres de cámara que recorre el scroll: vista general, zoom al nodo activo y vista de lo que falta.
-const KEYFRAMES = [
-  { pos: new THREE.Vector3(0, 0, 13), look: new THREE.Vector3(0, 0, 0) },
-  { pos: new THREE.Vector3(1.8, 4.6, 6), look: new THREE.Vector3(0, 4, 0) },
-  { pos: new THREE.Vector3(-3.5, -2, 11), look: new THREE.Vector3(-3.5, 0, 0) },
-];
-
-const EMBER = 0xff7a45;
-const VIOLET = 0x9d8cff;
 const STAR_WHITE = 0xdfe6ff;
 // Temperaturas de color reales de estrellas: de azul (calientes) a naranja (frías).
 const STAR_PALETTE = ['#9bb0ff', '#aabfff', '#cad7ff', '#f8f7ff', '#fff4ea', '#ffd2a1', '#ffb07a'];
+const GOLDEN_ANGLE = Math.PI * (3 - Math.sqrt(5));
 
 const smooth = (t: number) => t * t * (3 - 2 * t);
 
-/** Posición de cada fase en un anillo, la F0 arriba. Se exporta para los tests. */
-export function ringPosition(index: number, total: number, radius = 4) {
-  const angle = Math.PI / 2 - (index * 2 * Math.PI) / total;
-  return new THREE.Vector3(Math.cos(angle) * radius, Math.sin(angle) * radius, index % 2 ? -0.6 : 0.4);
+/** Centro de cada constelación alrededor de ti (el origen), repartidas en círculo. */
+export function constellationCenter(index: number, total: number, radius = 5) {
+  const angle = 2.5 - (index * 2 * Math.PI) / total;
+  return new THREE.Vector3(Math.cos(angle) * radius, Math.sin(angle) * radius * 0.75, index % 2 ? -1 : 0.5);
 }
 
 /**
- * Interpola la cámara entre KEYFRAMES según el progreso de scroll (0..1).
- * shiftX desplaza solo la vista general, para dejar sitio al texto de portada en pantallas anchas.
+ * Coloca las estrellas de cada constelación en espiral alrededor de su centro.
+ * Es determinista: el mismo contenido siempre dibuja el mismo cielo.
  */
-export function cameraAt(progress: number, shiftX = 0) {
-  const frames = KEYFRAMES.map((k, i) => (i === 0 ? {
-    pos: k.pos.clone().setX(k.pos.x + shiftX),
-    look: k.look.clone().setX(k.look.x + shiftX),
-  } : k));
+export function layoutStars(stars: StarData[], totalConstellations: number) {
+  const seen = new Array(totalConstellations).fill(0);
+  const counts = new Array(totalConstellations).fill(0);
+  stars.forEach((s) => counts[s.constellation]++);
+  return stars.map((s) => {
+    const j = seen[s.constellation]++;
+    const r = 0.5 + 2 * Math.sqrt((j + 0.5) / counts[s.constellation]);
+    const a = j * GOLDEN_ANGLE;
+    return constellationCenter(s.constellation, totalConstellations)
+      .add(new THREE.Vector3(Math.cos(a) * r, Math.sin(a) * r * 0.8, (j % 3) * 0.4 - 0.4));
+  });
+}
+
+type Frame = { pos: THREE.Vector3; look: THREE.Vector3 };
+
+/** Encuadres del recorrido: vista general y luego una parada por constelación. */
+export function buildKeyframes(centers: THREE.Vector3[]): Frame[] {
+  return [
+    { pos: new THREE.Vector3(0, 0, 16), look: new THREE.Vector3() },
+    ...centers.map((c) => ({ pos: c.clone().add(new THREE.Vector3(1.2, 0.6, 9.5)), look: c.clone() })),
+  ];
+}
+
+/**
+ * Interpola la cámara entre encuadres según el progreso de scroll (0..1).
+ * shiftX desplaza los encuadres en horizontal para dejar sitio al texto a la izquierda en pantallas anchas.
+ * Se aplica entero a 16 unidades de distancia y en proporción más cerca, para que el hueco en pantalla sea parecido.
+ */
+export function cameraAt(progress: number, keyframes: Frame[], shiftX = 0) {
+  const frames = keyframes.map((k) => {
+    const dx = (shiftX * k.pos.distanceTo(k.look)) / 16;
+    return { pos: k.pos.clone().setX(k.pos.x + dx), look: k.look.clone().setX(k.look.x + dx) };
+  });
+  if (frames.length === 1) return { pos: frames[0].pos.clone(), look: frames[0].look.clone() };
   const p = Math.min(Math.max(progress, 0), 1) * (frames.length - 1);
   const i = Math.min(Math.floor(p), frames.length - 2);
   const t = smooth(p - i);
@@ -40,6 +62,7 @@ export function cameraAt(progress: number, shiftX = 0) {
     look: frames[i].look.clone().lerp(frames[i + 1].look, t),
   };
 }
+
 
 // --- Texturas generadas en un canvas: sin imágenes que descargar. ---
 
@@ -165,7 +188,7 @@ function starField(count: number) {
   return new THREE.Points(geometry, material);
 }
 
-function line(a: THREE.Vector3, b: THREE.Vector3, color: number, opacity: number, dashed: boolean) {
+function line(a: THREE.Vector3, b: THREE.Vector3, color: THREE.ColorRepresentation, opacity: number, dashed: boolean) {
   const material = dashed
     ? new THREE.LineDashedMaterial({ color, opacity, dashSize: 0.12, gapSize: 0.22, ...additive })
     : new THREE.LineBasicMaterial({ color, opacity, ...additive });
@@ -176,12 +199,17 @@ function line(a: THREE.Vector3, b: THREE.Vector3, color: number, opacity: number
 
 export function mountGraph(options: {
   canvas: HTMLCanvasElement;
-  phases: Phase[];
-  labels: HTMLElement[];
+  stars: StarData[];
+  /** Cuántas constelaciones visibles hay (las que tienen estrellas), en orden. */
+  totalConstellations: number;
+  /** Etiqueta HTML de cada estrella, en el mismo orden que stars. */
+  starLabels: HTMLElement[];
+  /** Nombre HTML de cada constelación, en orden. */
+  constellationLabels: HTMLElement[];
   getProgress: () => number;
   reducedMotion: boolean;
 }) {
-  const { canvas, phases, labels, getProgress, reducedMotion } = options;
+  const { canvas, stars, totalConstellations, starLabels, constellationLabels, getProgress, reducedMotion } = options;
   const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
@@ -190,7 +218,7 @@ export function mountGraph(options: {
   const glow = glowTexture();
   const spikes = spikeTexture();
 
-  const star = (pos: THREE.Vector3, color: number, size: number, withSpikes = false) => {
+  const star = (pos: THREE.Vector3, color: THREE.ColorRepresentation, size: number, withSpikes = false) => {
     const sprite = new THREE.Sprite(new THREE.SpriteMaterial({ map: glow, color, ...additive }));
     sprite.scale.setScalar(size);
     sprite.position.copy(pos);
@@ -219,48 +247,43 @@ export function mountGraph(options: {
     return cloud;
   });
 
-  const stars = starField(4000);
-  scene.add(stars);
+  const field = starField(4000);
+  scene.add(field);
 
+  // Tú, en el centro.
   const center = new THREE.Vector3();
-  star(center, STAR_WHITE, 3.2, true);
+  star(center, STAR_WHITE, 3, true);
 
-  const positions = phases.map((_, i) => ringPosition(i, phases.length));
-  const pulsing: THREE.Sprite[] = [];
-  const flickering: { sprite: THREE.Sprite; phase: number }[] = [];
+  const positions = layoutStars(stars, totalConstellations);
+  const centers = Array.from({ length: totalConstellations }, (_, i) => constellationCenter(i, totalConstellations));
+  const keyframes = buildKeyframes(centers);
+  const twinkling: { sprite: THREE.Sprite; phase: number; base: number }[] = [];
 
-  phases.forEach((phase, i) => {
-    const pos = positions[i];
-    scene.add(line(pos, positions[(i + 1) % positions.length], VIOLET, 0.2, true));
+  // Trazo de cada constelación: une sus estrellas en orden, como en las cartas celestes.
+  for (let c = 0; c < totalConstellations; c++) {
+    const members = positions.filter((_, i) => stars[i].constellation === c);
+    const color = stars.find((s) => s.constellation === c)?.color ?? STAR_WHITE;
+    for (let i = 1; i < members.length; i++) scene.add(line(members[i - 1], members[i], color, 0.35, false));
+    if (members[0]) scene.add(line(center, members[0], color, 0.18, true));
+  }
 
-    if (phase.active) {
-      scene.add(line(center, pos, EMBER, 0.55, false));
-      pulsing.push(star(pos, EMBER, 2.6, true));
-      // Satélites: las piezas que ya cuelgan de la fase activa.
-      [-1, 1].forEach((side) => {
-        const sat = pos.clone().add(new THREE.Vector3(side * 0.9, 0.5, 0.3));
-        scene.add(line(pos, sat, EMBER, 0.4, false));
-        star(sat, 0xffb07a, 0.8);
-      });
-    } else {
-      // Fases pendientes: estrellas débiles que parpadean, unidas con trazo discontinuo.
-      scene.add(line(center, pos, VIOLET, 0.45, true));
-      flickering.push({ sprite: star(pos, 0xaabfff, 1.1), phase: Math.random() * 10 });
-    }
+  stars.forEach((s, i) => {
+    const size = 0.7 + s.brightness * 0.55;
+    twinkling.push({ sprite: star(positions[i], s.color, size, s.brightness === 3), phase: i * 1.7, base: size });
   });
 
   const resize = () => {
     const { clientWidth: w, clientHeight: h } = canvas;
     renderer.setSize(w, h, false);
     camera.aspect = w / h;
-    // En vertical (móvil) el anillo no cabe: se aleja la cámara un poco.
-    camera.zoom = camera.aspect < 1 ? 0.7 : 1;
+    // En vertical (móvil) el cielo no cabe: se aleja la cámara un poco.
+    camera.zoom = camera.aspect < 1 ? 0.6 : 1;
     camera.updateProjectionMatrix();
   };
   new ResizeObserver(resize).observe(canvas);
   resize();
 
-  // Paralaje suave con el puntero: el cielo se mueve un poco detrás del grafo.
+  // Paralaje suave con el puntero: el cielo se mueve un poco detrás de las constelaciones.
   const pointer = new THREE.Vector2();
   const parallax = new THREE.Vector2();
   if (!reducedMotion) {
@@ -269,35 +292,37 @@ export function mountGraph(options: {
     }, { passive: true });
   }
 
-  const starUniforms = (stars.material as THREE.ShaderMaterial).uniforms;
+  const fieldUniforms = (field.material as THREE.ShaderMaterial).uniforms;
   const projected = new THREE.Vector3();
+  const place = (label: HTMLElement, pos: THREE.Vector3) => {
+    projected.copy(pos).project(camera);
+    const x = (projected.x * 0.5 + 0.5) * canvas.clientWidth;
+    const y = (-projected.y * 0.5 + 0.5) * canvas.clientHeight;
+    label.style.translate = `${x}px ${y}px`;
+    label.style.opacity = projected.z < 1 ? '' : '0';
+  };
   let visible = true;
   let frame = 0;
 
   const render = (time: number) => {
     const t = reducedMotion ? 0 : time / 1000;
-    const { pos, look } = cameraAt(getProgress(), camera.aspect > 1.2 ? -4 : 0);
+    const { pos, look } = cameraAt(getProgress(), keyframes, camera.aspect > 1.2 ? -4.5 : 0);
     parallax.lerp(pointer, 0.05);
     camera.position.copy(pos).add(new THREE.Vector3(parallax.x * 0.6, -parallax.y * 0.4, 0));
     camera.lookAt(look);
 
-    starUniforms.time.value = t;
-    stars.rotation.y = t * 0.01;
+    fieldUniforms.time.value = t;
+    field.rotation.y = t * 0.01;
     clouds.forEach((c, i) => (c.material.rotation += reducedMotion ? 0 : 0.0002 * (i + 1)));
-    pulsing.forEach((s) => s.scale.setScalar(2.6 + Math.sin(t * 2) * 0.25));
-    flickering.forEach(({ sprite, phase }) => {
-      sprite.material.opacity = 0.55 + 0.35 * Math.sin(t * 1.7 + phase) * Math.sin(t * 0.7 + phase * 2);
+    twinkling.forEach(({ sprite, phase, base }) => {
+      sprite.scale.setScalar(base * (1 + 0.08 * Math.sin(t * 1.3 + phase)));
+      sprite.material.opacity = 0.8 + 0.2 * Math.sin(t * 1.7 + phase) * Math.sin(t * 0.7 + phase * 2);
     });
     renderer.render(scene, camera);
 
-    // Las etiquetas son HTML real (accesible); aquí solo se colocan sobre su nodo.
-    labels.forEach((label, i) => {
-      projected.copy(positions[i]).project(camera);
-      const x = (projected.x * 0.5 + 0.5) * canvas.clientWidth;
-      const y = (-projected.y * 0.5 + 0.5) * canvas.clientHeight;
-      label.style.translate = `${x}px ${y}px`;
-      label.style.opacity = projected.z < 1 ? '1' : '0';
-    });
+    // Las etiquetas son HTML real (botones accesibles); aquí solo se colocan sobre su estrella.
+    starLabels.forEach((label, i) => place(label, positions[i]));
+    constellationLabels.forEach((label, i) => place(label, centers[i].clone().add(new THREE.Vector3(0, 2.9, 0))));
 
     if (visible) frame = requestAnimationFrame(render);
   };

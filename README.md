@@ -39,3 +39,25 @@ All commands are run from the root of the project, from a terminal:
   - [✅] Spanish
 - [✅] Responsive
 - [⌛] Deploy
+
+## Añadir una estrella
+
+Cada estrella del cielo es un archivo Markdown en `src/content/estrellas/`. Para añadir un post de LinkedIn, un repo o una faceta nueva, crea un archivo así y despliega:
+
+```md
+---
+constelacion: publicaciones # oficio | laboratorio | publicaciones
+tipo: post # faceta | repo | post
+brillo: 2 # 1 a 3: cuánto destaca en el cielo
+enlace: https://www.linkedin.com/posts/...
+es:
+  titulo: Título en español
+  texto: Una o dos frases.
+  cifra: Dato medible (opcional)
+en:
+  titulo: English title
+  texto: One or two sentences.
+---
+```
+
+Las constelaciones sin estrellas no se muestran; la primera publicación hace aparecer la de Publicaciones.

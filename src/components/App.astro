@@ -2,11 +2,10 @@
 import Layout from "../layouts/Layout.astro";
 import Experience from "@components/Experience.astro";
 import GraphTour from "@components/GraphTour.astro";
-import { geti18n } from "@i18n/index";
+import StarCard from "@components/StarCard.astro";
+import { loadSky } from "../sky";
 
-const { currentLocale } = Astro;
-const i18n = geti18n({ currentLocale });
-const projects = i18n.PROJECTS;
+const { i18n, constellations } = await loadSky(Astro.currentLocale);
 ---
 
 <Layout
@@ -17,27 +16,26 @@ const projects = i18n.PROJECTS;
   <main>
     <GraphTour />
 
-    <section id="proyectos" class="mx-auto w-full max-w-7xl px-4 pt-24 md:px-16">
-      <h2 class="mb-10 text-4xl font-bold tracking-tight md:text-5xl">{projects.TITLE}</h2>
-      <div class="grid gap-6 md:grid-cols-2">
-        <article class="project flex flex-col gap-3 rounded-2xl border border-ember/60 bg-white/[0.04] p-8">
-          <p class="font-mono text-sm text-ember">{projects.ACTIVE_EYEBROW}</p>
-          <h3 class="text-2xl font-bold">{projects.ACTIVE_TITLE}</h3>
-          <p class="leading-relaxed text-muted">{projects.ACTIVE_TEXT}</p>
-          <a
-            href="https://github.com/cristiand395/PortfolioAstro"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="mt-auto self-start py-2 text-ember underline-offset-4 hover:underline"
-          >
-            {projects.ACTIVE_LINK} ↗
-          </a>
-        </article>
-        <article class="project flex flex-col gap-3 rounded-2xl border border-dashed border-violet/60 bg-white/[0.02] p-8">
-          <p class="font-mono text-sm text-violet">{projects.PENDING_EYEBROW}</p>
-          <h3 class="text-2xl font-bold">{projects.PENDING_TITLE}</h3>
-          <p class="leading-relaxed text-muted">{projects.PENDING_TEXT}</p>
-        </article>
+    <section id="constelaciones" class="mx-auto w-full max-w-7xl px-4 pt-24 md:px-16">
+      <h2 class="mb-12 text-4xl font-bold tracking-tight md:text-5xl">{i18n.SKY.TITLE}</h2>
+      <div class="flex flex-col gap-16">
+        {
+          constellations.map((c) => (
+            <div>
+              <h3 class="mb-2 font-mono text-sm tracking-[0.3em] uppercase" style={`color: ${c.color}`}>
+                {c.name}
+              </h3>
+              <p class="mb-6 max-w-2xl text-muted">{c.text}</p>
+              <ul class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+                {c.stars.map((s) => (
+                  <li class="card">
+                    <StarCard {...s} color={c.color} typeLabel={i18n.SKY.TYPES[s.tipo]} linkLabel={i18n.SKY.LINK} />
+                  </li>
+                ))}
+              </ul>
+            </div>
+          ))
+        }
       </div>
     </section>
 
@@ -50,7 +48,7 @@ const projects = i18n.PROJECTS;
 
 <style>
   @supports (animation-timeline: view()) {
-    .project {
+    .card {
       animation: rise linear both;
       animation-timeline: view();
       animation-range: entry 0% cover 30%;

@@ -1,76 +1,17 @@
 {
   "SEO_TITLE": "Cristian Davila · Agentic AI Architect",
-  "SEO_DESCRIPTION": "Cristian Davila portfolio: agents, integrations and MCP servers. Every node in the graph is a public project with a number behind it.",
+  "SEO_DESCRIPTION": "Cristian Davila portfolio: agents, integrations and MCP servers, told as a sky full of stars.",
   "MENU": {
-    "GRAPH": "Graph",
-    "PROJECTS": "Projects",
+    "SKY": "Sky",
+    "CONSTELLATIONS": "Constellations",
     "EXPERIENCE": "Experience",
     "CONTACT": "Contact"
   },
   "HERO": {
-    "EYEBROW": "1 active node · 6 under construction",
+    "EYEBROW": "{stars} stars · {constellations} constellations",
     "TITLE": "I orchestrate agents that get the work done.",
-    "DESCRIPTION": "I lead a development team and work on architecture, integrations, CI/CD and MCP servers. I am on my way to agentic AI architect: every node in this graph is a public project with a number behind it.",
-    "CTA": "Explore the graph"
-  },
-  "TOUR": [
-    {
-      "EYEBROW": "F0 · active node",
-      "TITLE": "This portfolio is the first node.",
-      "TEXT": "Astro 7, Three.js and scroll-driven animations in native CSS. It grows with every project I ship."
-    },
-    {
-      "EYEBROW": "F1–F6 · under construction",
-      "TITLE": "Six nodes waiting to connect.",
-      "TEXT": "LLM fundamentals, evals, AI in the engineering process, MCP and agents, AI in production and a final project. Each one lights up when it has a repo, a number and a post."
-    }
-  ],
-  "PHASES": [
-    {
-      "ID": "F0",
-      "LABEL": "Portfolio",
-      "ACTIVE": true
-    },
-    {
-      "ID": "F1",
-      "LABEL": "LLM fundamentals",
-      "ACTIVE": false
-    },
-    {
-      "ID": "F2",
-      "LABEL": "Evals and quality",
-      "ACTIVE": false
-    },
-    {
-      "ID": "F3",
-      "LABEL": "AI in engineering",
-      "ACTIVE": false
-    },
-    {
-      "ID": "F4",
-      "LABEL": "MCP and agents",
-      "ACTIVE": false
-    },
-    {
-      "ID": "F5",
-      "LABEL": "AI in production",
-      "ACTIVE": false
-    },
-    {
-      "ID": "F6",
-      "LABEL": "Final project",
-      "ACTIVE": false
-    }
-  ],
-  "PROJECTS": {
-    "TITLE": "Projects",
-    "ACTIVE_EYEBROW": "Node F0 · active",
-    "ACTIVE_TITLE": "This portfolio",
-    "ACTIVE_TEXT": "Three.js graph, scroll-driven camera tour and View Transitions between pages.",
-    "ACTIVE_LINK": "View the code",
-    "PENDING_EYEBROW": "Node F1 · not connected",
-    "PENDING_TITLE": "First project",
-    "PENDING_TEXT": "It lights up once the project ships with a repo, a number and a post."
+    "DESCRIPTION": "I lead a development team and work on architecture, integrations, CI/CD and MCP servers. Every star in this sky is something I do, build or publish.",
+    "CTA": "Explore the sky"
   },
   "CONTACT_TITLE": "Let’s talk",
   "EXPERIENCE_TITLE": "Experience",
@@ -103,5 +44,32 @@
         "- Specify new features and functionalities."
       ]
     }
-  ]
+  ],
+  "CONSTELLATIONS": [
+    {
+      "ID": "oficio",
+      "NAME": "Craft",
+      "TEXT": "What I do every day: lead a team, design integrations and connect language models to real systems."
+    },
+    {
+      "ID": "laboratorio",
+      "NAME": "Lab",
+      "TEXT": "What I build on my own at weekends, for the joy of understanding how things work."
+    },
+    {
+      "ID": "publicaciones",
+      "NAME": "Writing",
+      "TEXT": "What I share on LinkedIn: ideas, numbers and lessons from what I build."
+    }
+  ],
+  "SKY": {
+    "TITLE": "Constellations",
+    "TYPES": {
+      "faceta": "Craft",
+      "repo": "Project",
+      "post": "Post"
+    },
+    "LINK": "Open",
+    "CLOSE": "Close"
+  }
 }
