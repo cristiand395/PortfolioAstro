@@ -8,10 +8,17 @@
     "CONTACT": "Contact"
   },
   "HERO": {
-    "EYEBROW": "{stars} stars · {constellations} constellations",
     "TITLE": "I orchestrate agents that get the work done.",
     "DESCRIPTION": "I lead a development team and work on architecture, integrations, CI/CD and MCP servers. Every star in this sky is something I do, build or publish.",
-    "CTA": "Explore the sky"
+    "CTA": "Explore the sky",
+    "STARS": {
+      "one": "star",
+      "other": "stars"
+    },
+    "CONSTELLATIONS": {
+      "one": "constellation",
+      "other": "constellations"
+    }
   },
   "CONTACT_TITLE": "Let’s talk",
   "EXPERIENCE_TITLE": "Experience",

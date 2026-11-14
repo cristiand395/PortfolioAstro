@@ -3,10 +3,11 @@ import StarCard from "@components/StarCard.astro";
 import { loadSky } from "../sky";
 
 const { i18n, constellations, stars } = await loadSky(Astro.currentLocale);
-const eyebrow = i18n.HERO.EYEBROW.replace("{stars}", String(stars.length)).replace(
-  "{constellations}",
-  String(constellations.length),
-);
+// "1 constelación" / "2 constelaciones": la forma correcta según el número y el idioma.
+const plural = new Intl.PluralRules(Astro.currentLocale ?? "en");
+const count = (n: number, forms: { one: string; other: string }) =>
+  `${n} ${plural.select(n) === "one" ? forms.one : forms.other}`;
+const eyebrow = `${count(stars.length, i18n.HERO.STARS)} · ${count(constellations.length, i18n.HERO.CONSTELLATIONS)}`;
 ---
 
 <section id="grafo" class="relative">
@@ -75,7 +76,7 @@ const eyebrow = i18n.HERO.EYEBROW.replace("{stars}", String(stars.length)).repla
         <div
           class="flex max-w-xl flex-col gap-6 rounded-2xl bg-ink/75 p-6 backdrop-blur md:bg-transparent md:p-0 md:backdrop-blur-none"
         >
-          <p class="font-mono text-sm text-violet">
+          <p class="flex items-center gap-2 font-mono text-sm text-violet">
             <span class="text-ember" aria-hidden="true">●</span>
             {eyebrow}
           </p>

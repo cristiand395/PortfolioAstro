@@ -8,10 +8,17 @@
     "CONTACT": "Contacto"
   },
   "HERO": {
-    "EYEBROW": "{stars} estrellas · {constellations} constelaciones",
     "TITLE": "Orquesto agentes que hacen el trabajo.",
     "DESCRIPTION": "Lidero un equipo de desarrollo y trabajo en arquitectura, integraciones, CI/CD y servidores MCP. Cada estrella de este cielo es algo que hago, construyo o publico.",
-    "CTA": "Recorrer el cielo"
+    "CTA": "Recorrer el cielo",
+    "STARS": {
+      "one": "estrella",
+      "other": "estrellas"
+    },
+    "CONSTELLATIONS": {
+      "one": "constelación",
+      "other": "constelaciones"
+    }
   },
   "CONTACT_TITLE": "Hablemos",
   "EXPERIENCE_TITLE": "Experiencia",
