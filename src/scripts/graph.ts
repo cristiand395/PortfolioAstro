@@ -9,6 +9,8 @@ const STAR_PALETTE = ['#9bb0ff', '#aabfff', '#cad7ff', '#f8f7ff', '#fff4ea', '#f
 const GOLDEN_ANGLE = Math.PI * (3 - Math.sqrt(5));
 
 const smooth = (t: number) => t * t * (3 - 2 * t);
+// Vista lejana y algo baja que acompaña al resto de la página tras el recorrido.
+const OUTRO = { pos: new THREE.Vector3(0, -2, 26), look: new THREE.Vector3(0, 0, 0) };
 
 /** Centro de cada constelación alrededor de ti (el origen), repartidas en círculo. */
 export function constellationCenter(index: number, total: number, radius = 5) {
@@ -294,19 +296,25 @@ export function mountGraph(options: {
 
   const fieldUniforms = (field.material as THREE.ShaderMaterial).uniforms;
   const projected = new THREE.Vector3();
-  const place = (label: HTMLElement, pos: THREE.Vector3) => {
+  const place = (label: HTMLElement, pos: THREE.Vector3, hidden: boolean) => {
     projected.copy(pos).project(camera);
     const x = (projected.x * 0.5 + 0.5) * canvas.clientWidth;
     const y = (-projected.y * 0.5 + 0.5) * canvas.clientHeight;
     label.style.translate = `${x}px ${y}px`;
-    label.style.opacity = projected.z < 1 ? '' : '0';
+    label.style.opacity = projected.z < 1 && !hidden ? '' : '0';
+    label.style.visibility = hidden ? 'hidden' : '';
   };
   let visible = true;
   let frame = 0;
 
   const render = (time: number) => {
     const t = reducedMotion ? 0 : time / 1000;
-    const { pos, look } = cameraAt(getProgress(), keyframes, camera.aspect > 1.2 ? -4.5 : 0);
+    const progress = getProgress();
+    const { pos, look } = cameraAt(progress, keyframes, camera.aspect > 1.2 ? -4.5 : 0);
+    // Pasado el recorrido, la cámara se aleja despacio: el cielo queda de fondo para el resto de la página.
+    const outro = smooth(Math.min(Math.max((progress - 1) * 1.2, 0), 1));
+    pos.lerp(OUTRO.pos, outro);
+    look.lerp(OUTRO.look, outro);
     parallax.lerp(pointer, 0.05);
     camera.position.copy(pos).add(new THREE.Vector3(parallax.x * 0.6, -parallax.y * 0.4, 0));
     camera.lookAt(look);
@@ -321,8 +329,9 @@ export function mountGraph(options: {
     renderer.render(scene, camera);
 
     // Las etiquetas son HTML real (botones accesibles); aquí solo se colocan sobre su estrella.
-    starLabels.forEach((label, i) => place(label, positions[i]));
-    constellationLabels.forEach((label, i) => place(label, centers[i].clone().add(new THREE.Vector3(0, 2.9, 0))));
+    const past = outro > 0.05;
+    starLabels.forEach((label, i) => place(label, positions[i], past));
+    constellationLabels.forEach((label, i) => place(label, centers[i].clone().add(new THREE.Vector3(0, 2.9, 0)), past));
 
     if (visible) frame = requestAnimationFrame(render);
   };

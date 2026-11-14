@@ -10,7 +10,7 @@ const eyebrow = i18n.HERO.EYEBROW.replace("{stars}", String(stars.length)).repla
 ---
 
 <section id="grafo" class="relative">
-  <div class="graph sticky top-0 h-svh overflow-hidden" data-graph>
+  <div class="graph fixed inset-0 -z-10 overflow-hidden" data-graph>
     <canvas class="absolute inset-0 size-full" aria-hidden="true"></canvas>
     <ul class="constellation-labels" aria-hidden="true">
       {
@@ -69,7 +69,7 @@ const eyebrow = i18n.HERO.EYEBROW.replace("{stars}", String(stars.length)).repla
     ))
   }
 
-  <div class="pointer-events-none relative -mt-[100svh]">
+  <div class="pointer-events-none relative">
     <article class="step flex min-h-svh items-center px-4 md:px-16">
       <div class="mx-auto w-full max-w-7xl">
         <div
@@ -117,14 +117,8 @@ const eyebrow = i18n.HERO.EYEBROW.replace("{stars}", String(stars.length)).repla
 </section>
 
 <style>
-  /* Sin WebGL las estrellas se ven como una lista de chips; con el cielo montado, cada una flota sobre su estrella. */
-  .star-labels {
-    position: absolute;
-    inset: auto 1rem 1rem;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0.5rem;
-  }
+  /* Sin WebGL no hay etiquetas flotantes: la sección Constelaciones ya lista todas las estrellas. */
+  .star-labels,
   .constellation-labels {
     display: none;
   }

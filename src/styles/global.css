@@ -20,13 +20,13 @@
 html {
   color-scheme: dark;
   scroll-behavior: smooth;
-  background: var(--color-ink);
+  /* El degradado vive en html y fijo: el cielo 3D (también fijo) se pinta encima en toda la página. */
+  background: radial-gradient(circle at 75% 0%, #1a1430 0%, var(--color-ink) 60%) fixed var(--color-ink);
 }
 
 body {
   font-family: var(--font-display);
   color: var(--color-paper);
-  background: radial-gradient(circle at 75% 0%, #1a1430 0%, var(--color-ink) 60%) no-repeat;
 }
 
 h1,
