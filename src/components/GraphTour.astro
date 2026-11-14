@@ -1,0 +1,162 @@
+---
+import { geti18n } from "@i18n/index";
+const { currentLocale } = Astro;
+const i18n = geti18n({ currentLocale });
+---
+
+<section id="grafo" class="relative">
+  <div class="graph sticky top-0 h-svh overflow-hidden" data-graph>
+    <canvas class="absolute inset-0 size-full" aria-hidden="true"></canvas>
+    <ol class="graph-labels" aria-label={i18n.MENU.GRAPH}>
+      {
+        i18n.PHASES.map((phase) => (
+          <li data-label data-id={phase.ID} data-active={String(phase.ACTIVE)}>
+            {phase.ACTIVE ? (
+              <a href="#proyectos" class="label label-active">
+                <span class="font-mono">{phase.ID}</span> {phase.LABEL}
+              </a>
+            ) : (
+              <span class="label">
+                <span class="font-mono">{phase.ID}</span> {phase.LABEL}
+              </span>
+            )}
+          </li>
+        ))
+      }
+    </ol>
+  </div>
+
+  <div class="relative -mt-[100svh]">
+    <article class="step flex min-h-svh items-center px-4 md:px-16">
+      <div class="mx-auto w-full max-w-7xl">
+        <div
+          class="flex max-w-xl flex-col gap-6 rounded-2xl bg-ink/75 p-6 backdrop-blur md:bg-transparent md:p-0 md:backdrop-blur-none"
+        >
+          <p class="font-mono text-sm text-violet">
+            <span class="text-ember" aria-hidden="true">●</span>
+            {i18n.HERO.EYEBROW}
+          </p>
+          <h1 class="text-5xl leading-none font-bold tracking-tight md:text-7xl">
+            {i18n.HERO.TITLE}
+          </h1>
+          <p class="text-lg leading-relaxed text-muted md:text-xl">
+            {i18n.HERO.DESCRIPTION}
+          </p>
+          <a
+            href="#tour-0"
+            class="self-start rounded-full bg-ember px-6 py-3.5 font-bold text-ink transition hover:bg-paper"
+          >
+            {i18n.HERO.CTA}
+          </a>
+        </div>
+      </div>
+    </article>
+
+    {
+      i18n.TOUR.map((step, index) => (
+        <article
+          id={`tour-${index}`}
+          class="step flex min-h-svh items-end px-4 pb-16 md:items-center md:px-16 md:pb-0"
+        >
+          <div class="mx-auto w-full max-w-7xl">
+            <div class="max-w-md rounded-2xl border border-white/10 bg-ink/70 p-8 backdrop-blur">
+              <p class="mb-3 font-mono text-sm text-ember">{step.EYEBROW}</p>
+              <h2 class="mb-4 text-3xl font-bold tracking-tight">{step.TITLE}</h2>
+              <p class="leading-relaxed text-muted">{step.TEXT}</p>
+            </div>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  /* Sin WebGL las fases se ven como una lista de chips; con el grafo montado, cada una flota sobre su nodo. */
+  .graph-labels {
+    position: absolute;
+    inset: auto 1rem 1rem;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+  .graph-ready .graph-labels {
+    inset: 0;
+    pointer-events: none;
+  }
+  .graph-ready .graph-labels li {
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin: 14px 0 0 14px;
+    transition: opacity 0.3s;
+  }
+  .label {
+    display: inline-flex;
+    gap: 0.4em;
+    border-radius: 999px;
+    padding: 0.25rem 0.7rem;
+    font-size: 0.8rem;
+    white-space: nowrap;
+    color: var(--color-muted);
+    background: rgb(7 7 11 / 0.6);
+    border: 1px dashed rgb(157 140 255 / 0.5);
+  }
+  .label-active {
+    pointer-events: auto;
+    color: var(--color-ink);
+    background: var(--color-ember);
+    border: 0;
+    font-weight: 700;
+  }
+
+  /* Cada paso entra y sale con su propio avance en pantalla: animation-timeline: view(). */
+  @supports (animation-timeline: view()) {
+    .step > div {
+      animation: step-cross linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+  }
+  @keyframes step-cross {
+    0% {
+      opacity: 0;
+      translate: 0 80px;
+    }
+    35%,
+    65% {
+      opacity: 1;
+      translate: 0 0;
+    }
+    100% {
+      opacity: 0;
+      translate: 0 -80px;
+    }
+  }
+</style>
+
+<script>
+  const root = document.querySelector<HTMLElement>("[data-graph]");
+  const tour = document.getElementById("grafo");
+  const canvas = root?.querySelector("canvas");
+  const hasWebGL = !!document.createElement("canvas").getContext("webgl2");
+
+  if (root && tour && canvas && hasWebGL) {
+    const labels = [...root.querySelectorAll<HTMLElement>("[data-label]")];
+    const { mountGraph } = await import("../scripts/graph");
+    mountGraph({
+      canvas,
+      labels,
+      phases: labels.map((label) => ({
+        id: label.dataset.id ?? "",
+        active: label.dataset.active === "true",
+      })),
+      reducedMotion: matchMedia("(prefers-reduced-motion: reduce)").matches,
+      getProgress: () => {
+        const rect = tour.getBoundingClientRect();
+        return -rect.top / (rect.height - innerHeight);
+      },
+    });
+    root.classList.add("graph-ready");
+  }
+</script>

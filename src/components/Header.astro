@@ -1,42 +1,56 @@
 ---
-import ThemeToogle from "@components/ThemeToogle.astro";
 import LanguageSelector from "@components/LanguageSelector.astro";
 import { geti18n } from "@i18n/index";
 const { currentLocale } = Astro;
 const i18n = geti18n({ currentLocale });
+const links = [
+  { href: "#grafo", label: i18n.MENU.GRAPH },
+  { href: "#proyectos", label: i18n.MENU.PROJECTS },
+  { href: "#experiencia", label: i18n.MENU.EXPERIENCE },
+  { href: "#contacto", label: i18n.MENU.CONTACT },
+];
 ---
 
 <header
   id="header-nav"
-  class="flex fixed z-50 top-0 justify-between items-center py-5 w-full mx-auto px-4"
+  class="fixed top-0 z-50 w-full px-4 py-4 md:px-16"
 >
-  <div class="w-full mx-auto max-w-(--breakpoint-xl) items-center justify-between flex">
-    <img
-      class="rounded-full w-10 h-10 lg:w-12 lg:h-12"
-      src="/icon.webp"
-      alt="Cristian Davila"
-    />
-    <nav>
-      <ul class="flex flex-row gap-x-4 md:gap-6 opacity-80 hidden sm:flex">
-        <li class="flex items-center">
-          <a class="text-md md:text-base" href="#top" title="Go to Home"
-            >{i18n.MENU.HOME}</a
-          >
-        </li>
-        <li class="flex items-center">
-          <a
-            class="text-md md:text-base"
-            href="#experience"
-            title="Go to Experience Section">{i18n.MENU.EXPERIENCE}</a
-          >
-        </li>
-        <li class="flex items-center">
-          <ThemeToogle />
-        </li>
-        <li>
-          <LanguageSelector />
-        </li>
+  <div class="mx-auto flex max-w-7xl items-center justify-between gap-4">
+    <a href="#grafo" class="text-lg font-bold tracking-tight">cristian davila</a>
+    <nav aria-label={i18n.MENU.GRAPH} class="hidden md:block">
+      <ul
+        class="flex gap-1 rounded-full border border-white/10 bg-white/5 p-1.5 text-sm backdrop-blur"
+      >
+        {
+          links.map((link) => (
+            <li>
+              <a
+                href={link.href}
+                class="block rounded-full px-4 py-2 text-muted transition hover:bg-paper hover:text-ink"
+              >
+                {link.label}
+              </a>
+            </li>
+          ))
+        }
       </ul>
     </nav>
+    <LanguageSelector />
   </div>
 </header>
+
+<style>
+  #header-nav {
+    view-transition-name: site-header;
+    animation: header-solid linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 300px;
+  }
+  @keyframes header-solid {
+    to {
+      background: rgb(7 7 11 / 0.75);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 1px 0 rgb(255 255 255 / 0.08);
+    }
+  }
+</style>

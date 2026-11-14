@@ -4,77 +4,56 @@ import Footer from "../components/Footer.astro";
 import "../styles/global.css";
 
 interface Props {
-	title: string;
-	description: string;
-	url: string;
+  title: string;
+  description: string;
+  url: string;
 }
 
 const { description, title, url } = Astro.props;
+const lang = Astro.currentLocale ?? "en";
 ---
 
 <!doctype html>
-<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<meta name="description" content={description} />
-		<meta name="viewport" content="width=device-width" />
-		<link rel="icon" type="image/webp" href="/icon.webp" />
-		<link rel="canonical" href={url} />
-		<meta name="generator" content={Astro.generator} />
-		<title>{title}</title>
-	</head>
-	<body class="relative text-black dark:text-white">
-		<div
-			class="absolute top-0 bottom-0 z-[-2] min-h-screen w-full bg-neutral-100 dark:bg-neutral-950
-      bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(217,216,255,0.5),rgba(255,255,255,0.9))]
-      dark:bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(120,119,198,0.3),rgba(255,255,255,0))]"
-		>
-		</div>
-		<Header />
-		<slot />
-		<Footer />
-	</body>
+<html lang={lang}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content={description} />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#07070b" />
+    <link rel="icon" type="image/webp" href="/icon.webp" />
+    <link rel="canonical" href={url} />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+  </head>
+  <body class="min-h-svh">
+    <div class="scroll-progress" aria-hidden="true"></div>
+    <Header />
+    <slot />
+    <Footer />
+  </body>
 </html>
 
 <style is:global>
-	:root {
-		color-scheme: light dark;
-	}
-	html {
-		font-family: "Onest Variable", sans-serif;
-		scroll-behavior: smooth;
-	}
-	#sun-svg,
-	html[data-theme="dark"] #moon-svg {
-		display: none;
-	}
-	#moon-svg,
-	html[data-theme="dark"] #sun-svg {
-		display: block;
-	}
-	body {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		min-height: 100vh;
-	}
-	@media (prefers-reduced-motion: reduce) {
-		html {
-			scroll-behavior: auto;
-		}
-	}
-	#header-nav {
-		animation: blur linear both;
-		animation-timeline: scroll();
-		animation-range: 0 500px;
-	}
-	@keyframes blur {
-		to {
-			box-shadow:
-				0px 5px 50px -5px rgba(0, 0, 0, 0.1),
-				0px 0px 0 1px rgba(0, 0, 0, 0.3);
-			background: rgba(0, 0, 0, 0.3);
-			backdrop-filter: blur(5px);
-		}
-	}
+  /* Barra de progreso de lectura: CSS puro con scroll-driven animations. */
+  .scroll-progress {
+    position: fixed;
+    inset: 0 0 auto;
+    z-index: 60;
+    height: 3px;
+    background: var(--color-ember);
+    transform-origin: left;
+    scale: 0 1;
+    animation: progress linear both;
+    animation-timeline: scroll(root);
+  }
+  @keyframes progress {
+    to {
+      scale: 1 1;
+    }
+  }
+  @supports not (animation-timeline: scroll()) {
+    .scroll-progress {
+      display: none;
+    }
+  }
 </style>

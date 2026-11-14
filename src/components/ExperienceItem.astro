@@ -8,21 +8,16 @@ const { DATE, TITLE, DESCRIPTIONS } = Astro.props;
 ---
 
 <div
-  class="absolute w-3 h-3 bg-gray-200 rounded-full mt-1.5 point border border-white dark:border-gray-900"
+  class="point absolute mt-1.5 size-3 rounded-full border-2 border-ink bg-violet"
 >
 </div>
-<time
-  class="mb-1 text-sm font-normal leading-none text-gray-500 dark:text-gray-500"
-  >{DATE}</time
->
-<h3 class="text-xl font-semibold text-violet-600 dark:text-violet-400 my-1">
+<time class="mb-1 font-mono text-sm text-muted/80">{DATE}</time>
+<h3 class="my-1 text-xl font-semibold text-paper">
   {TITLE}
 </h3>
 {
   DESCRIPTIONS.map((item) => (
-    <p class="mb-1 text-base font-normal text-gray-600 dark:text-gray-400 text-pretty">
-      {item}
-    </p>
+    <p class="mb-1 text-base text-pretty text-muted">{item}</p>
   ))
 }
 

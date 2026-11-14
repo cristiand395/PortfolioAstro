@@ -1,19 +1,12 @@
 ---
 import Layout from "../layouts/Layout.astro";
-// Components
 import Experience from "@components/Experience.astro";
-import ExperienceIcon from "@components/icons/Experience.astro";
-import SectionContainer from "@components/SectionContainer.astro";
-import SocialPill from "@components/SocialPill.astro";
-// Icons
-import GitHubIcon from "@components/icons/GitHub.astro";
-import MailIcon from "@components/icons/Mail.astro";
-import LinkedInIcon from "@components/icons/LinkedIn.astro";
-
+import GraphTour from "@components/GraphTour.astro";
 import { geti18n } from "@i18n/index";
 
 const { currentLocale } = Astro;
 const i18n = geti18n({ currentLocale });
+const projects = i18n.PROJECTS;
 ---
 
 <Layout
@@ -21,39 +14,53 @@ const i18n = geti18n({ currentLocale });
   description={i18n.SEO_DESCRIPTION}
   url="https://cristiand395.github.io/portfolio/"
 >
-  <main class="px-4">
-    <SectionContainer id="top" class="pt-40 pb-10">
-      <h1
-        class="dark:text-white text-4xl md:text-5xl font-bold flex grow gap-x-4 pb-4"
-      >
-        {i18n.RESUME_TITLE}
-      </h1>
-      <h2
-        class="text-base md:text-xl opacity-80 whitespace-normal max-w-[700px] leading-7"
-      >
-        {i18n.RESUME_DESCRIPTION}
-      </h2>
-      <nav class="flex gap-x-4 mt-5 flex-wrap">
-        <SocialPill href="https://www.linkedin.com/in/cristiand395/">
-          <LinkedInIcon class="size-1" />
-          LinkedIn
-        </SocialPill>
-        <SocialPill href="https://github.com/cristiand395">
-          <GitHubIcon class="size-1 lg:size-6" />
-          GitHub
-        </SocialPill>
-        <SocialPill href="mailto:cristiand395@gmail.com">
-          <MailIcon class="size-6 lg:size-6" />
-          cristiand395@gmail.com
-        </SocialPill>
-      </nav>
-    </SectionContainer>
-    <SectionContainer id="experience">
-      <h2 class="text-2xl font-semibold mb-6 flex gap-x-3 items-center">
-        <ExperienceIcon class="size-7" />
-        {i18n.EXPERIENCE_TITLE}
-      </h2>
+  <main>
+    <GraphTour />
+
+    <section id="proyectos" class="mx-auto w-full max-w-7xl px-4 pt-24 md:px-16">
+      <h2 class="mb-10 text-4xl font-bold tracking-tight md:text-5xl">{projects.TITLE}</h2>
+      <div class="grid gap-6 md:grid-cols-2">
+        <article class="project flex flex-col gap-3 rounded-2xl border border-ember/60 bg-white/[0.04] p-8">
+          <p class="font-mono text-sm text-ember">{projects.ACTIVE_EYEBROW}</p>
+          <h3 class="text-2xl font-bold">{projects.ACTIVE_TITLE}</h3>
+          <p class="leading-relaxed text-muted">{projects.ACTIVE_TEXT}</p>
+          <a
+            href="https://github.com/cristiand395/PortfolioAstro"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="mt-auto self-start py-2 text-ember underline-offset-4 hover:underline"
+          >
+            {projects.ACTIVE_LINK} ↗
+          </a>
+        </article>
+        <article class="project flex flex-col gap-3 rounded-2xl border border-dashed border-violet/60 bg-white/[0.02] p-8">
+          <p class="font-mono text-sm text-violet">{projects.PENDING_EYEBROW}</p>
+          <h3 class="text-2xl font-bold">{projects.PENDING_TITLE}</h3>
+          <p class="leading-relaxed text-muted">{projects.PENDING_TEXT}</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="experiencia" class="mx-auto w-full max-w-7xl px-4 pt-24 md:px-16">
+      <h2 class="mb-10 text-4xl font-bold tracking-tight md:text-5xl">{i18n.EXPERIENCE_TITLE}</h2>
       <Experience />
-    </SectionContainer>
+    </section>
   </main>
 </Layout>
+
+<style>
+  @supports (animation-timeline: view()) {
+    .project {
+      animation: rise linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 30%;
+    }
+  }
+  @keyframes rise {
+    from {
+      opacity: 0;
+      translate: 0 60px;
+      scale: 0.96;
+    }
+  }
+</style>

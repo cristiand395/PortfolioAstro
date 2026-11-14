@@ -1,4 +1,51 @@
-@import '@fontsource-variable/onest';
+@import '@fontsource-variable/space-grotesk';
+@import '@fontsource-variable/jetbrains-mono';
 @import 'tailwindcss';
 
-@custom-variant dark (&:where(.dark, .dark *));
+@theme {
+  --color-ink: #07070b;
+  --color-paper: #f2f0fa;
+  --color-muted: #c9c4dc;
+  --color-ember: #ff7a45;
+  --color-violet: #9d8cff;
+  --font-display: 'Space Grotesk Variable', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono Variable', ui-monospace, monospace;
+}
+
+/* Navegación entre páginas (cambio de idioma y futuras fichas) con View Transitions nativas. */
+@view-transition {
+  navigation: auto;
+}
+
+html {
+  color-scheme: dark;
+  scroll-behavior: smooth;
+  background: var(--color-ink);
+}
+
+body {
+  font-family: var(--font-display);
+  color: var(--color-paper);
+  background: radial-gradient(circle at 75% 0%, #1a1430 0%, var(--color-ink) 60%) no-repeat;
+}
+
+h1,
+h2,
+h3 {
+  text-wrap: balance;
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-ember);
+  outline-offset: 3px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  ::view-transition-group(*) {
+    animation: none !important;
+  }
+}

@@ -1,14 +1,78 @@
 {
-  "SEO_TITLE": "Cristian Davila Portfolio",
-  "SEO_DESCRIPTION": "Professional information about Cristian Davila",
-  "RESUME_TITLE": "Cristian Davila, Here!",
-  "STATUS_BADGE": "Working",
+  "SEO_TITLE": "Cristian Davila · Agentic AI Architect",
+  "SEO_DESCRIPTION": "Cristian Davila portfolio: agents, integrations and MCP servers. Every node in the graph is a public project with a number behind it.",
   "MENU": {
-    "HOME": "Home",
+    "GRAPH": "Graph",
+    "PROJECTS": "Projects",
     "EXPERIENCE": "Experience",
     "CONTACT": "Contact"
   },
-  "RESUME_DESCRIPTION": "A passionate software developer who always thrives to work on end to end scalable products and technical systems to create impact people and help team grow on the way.",
+  "HERO": {
+    "EYEBROW": "1 active node · 6 under construction",
+    "TITLE": "I orchestrate agents that get the work done.",
+    "DESCRIPTION": "I lead a development team and work on architecture, integrations, CI/CD and MCP servers. I am on my way to agentic AI architect: every node in this graph is a public project with a number behind it.",
+    "CTA": "Explore the graph"
+  },
+  "TOUR": [
+    {
+      "EYEBROW": "F0 · active node",
+      "TITLE": "This portfolio is the first node.",
+      "TEXT": "Astro 7, Three.js and scroll-driven animations in native CSS. It grows with every project I ship."
+    },
+    {
+      "EYEBROW": "F1–F6 · under construction",
+      "TITLE": "Six nodes waiting to connect.",
+      "TEXT": "LLM fundamentals, evals, AI in the engineering process, MCP and agents, AI in production and a final project. Each one lights up when it has a repo, a number and a post."
+    }
+  ],
+  "PHASES": [
+    {
+      "ID": "F0",
+      "LABEL": "Portfolio",
+      "ACTIVE": true
+    },
+    {
+      "ID": "F1",
+      "LABEL": "LLM fundamentals",
+      "ACTIVE": false
+    },
+    {
+      "ID": "F2",
+      "LABEL": "Evals and quality",
+      "ACTIVE": false
+    },
+    {
+      "ID": "F3",
+      "LABEL": "AI in engineering",
+      "ACTIVE": false
+    },
+    {
+      "ID": "F4",
+      "LABEL": "MCP and agents",
+      "ACTIVE": false
+    },
+    {
+      "ID": "F5",
+      "LABEL": "AI in production",
+      "ACTIVE": false
+    },
+    {
+      "ID": "F6",
+      "LABEL": "Final project",
+      "ACTIVE": false
+    }
+  ],
+  "PROJECTS": {
+    "TITLE": "Projects",
+    "ACTIVE_EYEBROW": "Node F0 · active",
+    "ACTIVE_TITLE": "This portfolio",
+    "ACTIVE_TEXT": "Three.js graph, scroll-driven camera tour and View Transitions between pages.",
+    "ACTIVE_LINK": "View the code",
+    "PENDING_EYEBROW": "Node F1 · not connected",
+    "PENDING_TITLE": "First project",
+    "PENDING_TEXT": "It lights up once the project ships with a repo, a number and a post."
+  },
+  "CONTACT_TITLE": "Let’s talk",
   "EXPERIENCE_TITLE": "Experience",
   "EXPERIENCE_DATA": [
     {
@@ -39,6 +103,5 @@
         "- Specify new features and functionalities."
       ]
     }
-  ],
-  "COPYRIGHT": "Copyright © 2023."
+  ]
 }

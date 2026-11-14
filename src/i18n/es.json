@@ -1,14 +1,78 @@
 {
-  "SEO_TITLE": "Cristian Davila Portafolio",
-  "SEO_DESCRIPTION": "Información profesional de Cristian Davila",
-  "RESUME_TITLE": "Hola! soy Cristian Davila",
-  "STATUS_BADGE": "Trabajando",
-  "RESUME_DESCRIPTION": "Desarrollador de Software que siempre se esfuerza en trabajar de inicio a fin en productos escalables y sistemas tecnológicos para crear impacto y ayudar al equipo a crecer en el camino.",
+  "SEO_TITLE": "Cristian Davila · Arquitecto de IA agéntica",
+  "SEO_DESCRIPTION": "Portfolio de Cristian Davila: agentes, integraciones y servidores MCP. Cada nodo del grafo es un proyecto público con su cifra.",
   "MENU": {
-    "HOME": "Inicio",
+    "GRAPH": "Grafo",
+    "PROJECTS": "Proyectos",
     "EXPERIENCE": "Experiencia",
     "CONTACT": "Contacto"
   },
+  "HERO": {
+    "EYEBROW": "1 nodo activo · 6 en construcción",
+    "TITLE": "Orquesto agentes que hacen el trabajo.",
+    "DESCRIPTION": "Lidero un equipo de desarrollo y trabajo en arquitectura, integraciones, CI/CD y servidores MCP. Voy camino de arquitecto de IA agéntica: cada nodo de este grafo es un proyecto público con su cifra.",
+    "CTA": "Recorrer el grafo"
+  },
+  "TOUR": [
+    {
+      "EYEBROW": "F0 · nodo activo",
+      "TITLE": "Este portfolio es el primer nodo.",
+      "TEXT": "Astro 7, Three.js y animaciones ligadas al scroll con CSS nativo. Se amplía con cada proyecto que cierro."
+    },
+    {
+      "EYEBROW": "F1–F6 · en construcción",
+      "TITLE": "Seis nodos esperan su conexión.",
+      "TEXT": "Fundamentos de LLM, evals, IA en el proceso de ingeniería, MCP y agentes, IA en producción y un proyecto final. Cada uno se enciende cuando hay repo, cifra y post."
+    }
+  ],
+  "PHASES": [
+    {
+      "ID": "F0",
+      "LABEL": "Portfolio",
+      "ACTIVE": true
+    },
+    {
+      "ID": "F1",
+      "LABEL": "Fundamentos de LLM",
+      "ACTIVE": false
+    },
+    {
+      "ID": "F2",
+      "LABEL": "Evals y calidad",
+      "ACTIVE": false
+    },
+    {
+      "ID": "F3",
+      "LABEL": "IA en ingeniería",
+      "ACTIVE": false
+    },
+    {
+      "ID": "F4",
+      "LABEL": "MCP y agentes",
+      "ACTIVE": false
+    },
+    {
+      "ID": "F5",
+      "LABEL": "IA en producción",
+      "ACTIVE": false
+    },
+    {
+      "ID": "F6",
+      "LABEL": "Proyecto final",
+      "ACTIVE": false
+    }
+  ],
+  "PROJECTS": {
+    "TITLE": "Proyectos",
+    "ACTIVE_EYEBROW": "Nodo F0 · activo",
+    "ACTIVE_TITLE": "Este portfolio",
+    "ACTIVE_TEXT": "Grafo en Three.js, recorrido de cámara con scroll y View Transitions entre páginas.",
+    "ACTIVE_LINK": "Ver el código",
+    "PENDING_EYEBROW": "Nodo F1 · sin conectar",
+    "PENDING_TITLE": "Primer proyecto",
+    "PENDING_TEXT": "Se enciende cuando el proyecto se cierre con repo, cifra y post."
+  },
+  "CONTACT_TITLE": "Hablemos",
   "EXPERIENCE_TITLE": "Experiencia",
   "EXPERIENCE_DATA": [
     {
@@ -39,6 +103,5 @@
         "- Especificar nuevas funcionalidades."
       ]
     }
-  ],
-  "COPYRIGHT": "Copyright © 2023."
+  ]
 }

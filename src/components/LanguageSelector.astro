@@ -1,64 +1,17 @@
 ---
-const { currentLocale = "/" } = Astro;
-
-const LOCALES: Record<string, { code: string; name: string; href: string }> = {
-  en: {
-    code: "en",
-    href: `/`,
-    name: "English",
-  },
-  es: {
-    code: "es",
-    href: "/es",
-    name: "Español",
-  },
-};
-
-const currentLocaleData = LOCALES[currentLocale];
-const otherLocales = Object.values(LOCALES).filter(
-  (locale) => locale.code !== currentLocale,
-);
+// Con dos idiomas basta un enlace al otro: funciona con teclado y en táctil, a diferencia de un menú por hover.
+const isSpanish = Astro.currentLocale === "es";
+const other = isSpanish
+  ? { href: "/", code: "EN", name: "English", lang: "en" }
+  : { href: "/es/", code: "ES", name: "Español", lang: "es" };
 ---
 
-<div class="relative inline-block text-left">
-  <div class="group">
-    <button
-      type="button"
-      class="cursor-pointer bg-transparent border border-current flex items-center p-2 rounded-lg text-xs sm:text-base"
-      aria-expanded="true"
-      aria-haspopup="true"
-    >
-      {currentLocaleData.name}
-      <svg
-        class="w-2.5 h-2.5 ms-3"
-        aria-hidden="true"
-        xmlns="http://www.w3.org/2000/svg"
-        fill="none"
-        viewBox="0 0 10 6"
-      >
-        <path
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          d="m1 1 4 4 4-4"></path>
-      </svg>
-    </button>
-    <ul
-      class="group-hover:block group-hover:animate-fade-down group-hover:animate-duration-200 cursor-pointer bg-transparent border absolute border-current rounded-lg text-sm w-full overflow-hidden hidden"
-    >
-      {
-        otherLocales.map((locale) => (
-          <li class="hover:bg-purple-200/60 dark:hover:bg-slate-200 dark:hover:text-black overflow-hidden flex align-middle">
-            <a
-              class="rounded-md whitespace-nowrap inline-flex w-full text-center m-2 text-xs sm:text-base"
-              href={`${locale.href}`}
-            >
-              {locale.name}
-            </a>
-          </li>
-        ))
-      }
-    </ul>
-  </div>
-</div>
+<a
+  href={other.href}
+  hreflang={other.lang}
+  lang={other.lang}
+  aria-label={other.name}
+  class="flex min-h-11 min-w-11 items-center justify-center rounded-full border border-white/15 px-3 font-mono text-sm text-muted transition hover:border-ember hover:text-paper"
+>
+  {other.code}
+</a>

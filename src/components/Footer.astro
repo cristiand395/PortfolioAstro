@@ -1,37 +1,35 @@
 ---
+import GitHubIcon from "@components/icons/GitHub.astro";
+import LinkedInIcon from "@components/icons/LinkedIn.astro";
+import MailIcon from "@components/icons/Mail.astro";
 import { geti18n } from "@i18n/index";
 const { currentLocale } = Astro;
 const i18n = geti18n({ currentLocale });
+const links = [
+  { href: "https://github.com/cristiand395", label: "GitHub", Icon: GitHubIcon },
+  { href: "https://www.linkedin.com/in/cristiand395/", label: "LinkedIn", Icon: LinkedInIcon },
+  { href: "mailto:cristiand395@gmail.com", label: "cristiand395@gmail.com", Icon: MailIcon },
+];
 ---
 
-<footer
-  class="bg-white rounded-lg shadow m-4 dark:bg-transparent w-full xl:w-[1120px] mx-auto px-4"
->
-  <div class="w-full mx-auto max-w-(--breakpoint-xl) p-4 items-center justify-end flex">
-    <!-- <span class="text-sm text-gray-500 sm:text-center dark:text-gray-400">
-      {i18n.COPYRIGHT}
-    </span> -->
-    <ul
-      class="flex flex-wrap items-center text-sm font-medium text-gray-500 dark:text-gray-400 sm:mt-0"
-    >
-      <li>
-        <a
-          href="/"
-          class="hover:underline me-4 md:me-6"
-          title="Go to Home Section"
-        >
-          {i18n.MENU.HOME}
-        </a>
-      </li>
-      <li>
-        <a
-          href="#experience"
-          class="hover:underline me-4 md:me-6"
-          title="Go to Experience Section"
-        >
-          {i18n.MENU.EXPERIENCE}
-        </a>
-      </li>
-    </ul>
-  </div>
+<footer id="contacto" class="mx-auto w-full max-w-7xl px-4 pt-24 pb-12 md:px-16">
+  <h2 class="mb-8 text-4xl font-bold tracking-tight md:text-6xl">{i18n.CONTACT_TITLE}</h2>
+  <ul class="flex flex-wrap gap-3">
+    {
+      links.map(({ href, label, Icon }) => (
+        <li>
+          <a
+            href={href}
+            target={href.startsWith("http") ? "_blank" : undefined}
+            rel="noopener noreferrer"
+            class="flex min-h-11 items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-muted transition hover:border-ember hover:text-paper"
+          >
+            <Icon class="size-5" />
+            {label}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <p class="mt-16 font-mono text-xs text-muted/70">grafo v0.1 · 1 / 7</p>
 </footer>
