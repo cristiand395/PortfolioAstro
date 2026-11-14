@@ -80,7 +80,9 @@
       "DESCRIPTIONS": [
         "- Corregir problemas de interfaz de usuario de sitios web.",
         "- Re-diseñar sitios web dependiendo de las necesidades del cliente."
-      ]
+      ],
+      "START": "2021-08",
+      "END": "2022-05"
     },
     {
       "DATE": "Octubre 2020 - Julio 2021",
@@ -89,11 +91,17 @@
         "- Desarrollar desde cero un sistema de facturación integrado con el sistema tributario del país.",
         "- Diseñar interfaces de usuario en Adobe XD.",
         "- Especificar nuevas funcionalidades."
-      ]
+      ],
+      "START": "2020-10",
+      "END": "2021-07"
     }
   ],
   "EXPERIENCE_YEARS": {
     "one": "{n} año",
     "other": "{n} años"
+  },
+  "EXPERIENCE_MONTHS": {
+    "one": "{n} mes",
+    "other": "{n} meses"
   }
 }
