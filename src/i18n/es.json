@@ -1,26 +1,62 @@
 {
   "SEO_TITLE": "Cristian Davila · Arquitecto de IA agéntica",
-  "SEO_DESCRIPTION": "Portfolio de Cristian Davila: agentes, integraciones y servidores MCP, contados como un cielo de estrellas.",
+  "SEO_DESCRIPTION": "Lo que falla, resuelto. Lo nuevo, bien hecho. Agentes, integraciones y servidores MCP con un método medible.",
   "MENU": {
-    "SKY": "Inicio",
-    "CONSTELLATIONS": "Qué hago",
+    "METHOD": "Método",
+    "WHAT": "Qué hago",
     "EXPERIENCE": "Experiencia",
     "CONTACT": "Contacto"
   },
   "HERO": {
-    "TITLE": "Orquesto agentes que hacen el trabajo.",
-    "DESCRIPTION": "Lidero un equipo de desarrollo y trabajo en arquitectura, integraciones, CI/CD y servidores MCP. Cada estrella de este cielo es algo que hago, construyo o publico.",
-    "CTA": "Recorrer el cielo",
-    "STARS": {
-      "one": "estrella",
-      "other": "estrellas"
-    },
-    "CONSTELLATIONS": {
-      "one": "constelación",
-      "other": "constelaciones"
-    }
+    "ROLE": "arquitecto de IA agéntica",
+    "LINE1": "Lo que falla, resuelto.",
+    "LINE2": "Lo nuevo,",
+    "HIGHLIGHT": "bien hecho.",
+    "DESCRIPTION": "Lidero un equipo de desarrollo y conecto agentes de IA con sistemas reales: integraciones, servidores MCP y CI/CD, con seguridad y cifras."
   },
-  "CONTACT_TITLE": "Hablemos",
+  "STEPS": [
+    {
+      "LABEL": "problema o idea",
+      "TITLE": "Escuchar antes de proponer.",
+      "TEXT": "Todo empieza con algo que frena al negocio o con una idea que nadie ha probado. Primero entiendo qué duele y a quién."
+    },
+    {
+      "LABEL": "entender",
+      "TITLE": "Desmontar pieza a pieza.",
+      "TEXT": "Código, datos, procesos y personas. Audito antes de tocar, para saber qué se rompe y por qué."
+    },
+    {
+      "LABEL": "construir",
+      "TITLE": "Montar lo que hace falta.",
+      "TEXT": "Arquitectura, integraciones, servidores MCP y agentes que trabajan con sistemas reales, con permisos y una persona en el bucle."
+    },
+    {
+      "LABEL": "medir",
+      "TITLE": "Una cifra que lo demuestre.",
+      "TEXT": "Defino la métrica que dirá si funciona. Sin cifra no hay mejora, solo opiniones."
+    },
+    {
+      "LABEL": "en producción",
+      "TITLE": "Y que se quede funcionando.",
+      "TEXT": "CI/CD, revisión y seguridad para que llegue a producción y siga ahí. Bien hecho."
+    }
+  ],
+  "WHAT": {
+    "EYEBROW": "qué hago",
+    "TITLE": "El oficio detrás del método",
+    "TYPES": {
+      "faceta": "oficio",
+      "repo": "proyecto",
+      "post": "publicación"
+    },
+    "LINK": "Abrir"
+  },
+  "EXPERIENCE_EYEBROW": "experiencia",
+  "CONTACT": {
+    "EYEBROW": "a partir de ahora",
+    "TITLE": "¿Construimos lo",
+    "HIGHLIGHT": "siguiente?"
+  },
   "EXPERIENCE_TITLE": "Experiencia",
   "EXPERIENCE_DATA": [
     {
@@ -51,32 +87,5 @@
         "- Especificar nuevas funcionalidades."
       ]
     }
-  ],
-  "CONSTELLATIONS": [
-    {
-      "ID": "oficio",
-      "NAME": "Oficio",
-      "TEXT": "Lo que hago cada día: liderar un equipo, diseñar integraciones y conectar modelos de lenguaje con sistemas reales."
-    },
-    {
-      "ID": "laboratorio",
-      "NAME": "Laboratorio",
-      "TEXT": "Lo que construyo por mi cuenta los fines de semana, por el gusto de entender cómo funcionan las cosas."
-    },
-    {
-      "ID": "publicaciones",
-      "NAME": "Publicaciones",
-      "TEXT": "Lo que cuento en LinkedIn: ideas, cifras y aprendizajes de lo que construyo."
-    }
-  ],
-  "SKY": {
-    "TITLE": "Qué hago",
-    "TYPES": {
-      "faceta": "Oficio",
-      "repo": "Proyecto",
-      "post": "Publicación"
-    },
-    "LINK": "Abrir",
-    "CLOSE": "Cerrar"
-  }
+  ]
 }

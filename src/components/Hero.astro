@@ -1,0 +1,28 @@
+---
+import Rail from "@components/Rail.astro";
+import { geti18n } from "@i18n/index";
+const i18n = geti18n({ currentLocale: Astro.currentLocale });
+---
+
+<!-- Portada: la misma que el banner de LinkedIn, para que la web y el perfil se reconozcan al instante. -->
+<section id="inicio" class="flex min-h-svh flex-col justify-center px-4 pt-28 pb-16 md:px-16">
+  <div class="mx-auto flex w-full max-w-6xl flex-col gap-8">
+    <p class="font-mono text-sm text-muted md:text-base">{i18n.HERO.ROLE}</p>
+    <h1
+      class="titular text-5xl leading-[1.04] font-black tracking-[-0.035em] sm:text-7xl lg:text-[6.5rem]"
+    >
+      {i18n.HERO.LINE1}<br />{i18n.HERO.LINE2} <span class="hl">{i18n.HERO.HIGHLIGHT}</span>
+    </h1>
+    <p class="max-w-2xl text-lg leading-relaxed text-muted md:text-xl">{i18n.HERO.DESCRIPTION}</p>
+    <div class="mt-6 px-4 md:px-12">
+      <Rail labels={i18n.STEPS.map((s) => s.LABEL)} current={2} label={i18n.MENU.METHOD} />
+    </div>
+  </div>
+</section>
+
+<style>
+  /* Al cambiar de idioma, el titular se transforma en su traducción en vez de recargarse. */
+  .titular {
+    view-transition-name: titular;
+  }
+</style>

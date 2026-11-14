@@ -6,11 +6,12 @@ const { currentLocale } = Astro;
 const i18n = geti18n({ currentLocale });
 ---
 
-<ol class="relative border-s border-violet/30 ml-3">
+<!-- La experiencia como un riel vertical: el trabajo actual arriba, en naranja. -->
+<ol class="relative ml-3 border-s-4 border-rail">
   {
-    i18n.EXPERIENCE_DATA.map((experience) => (
-      <li class="mb-10 ms-4">
-        <ExperienceItem {...experience} />
+    i18n.EXPERIENCE_DATA.map((experience, index) => (
+      <li class="mb-10 ms-8">
+        <ExperienceItem {...experience} current={index === 0} />
       </li>
     ))
   }

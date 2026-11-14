@@ -12,23 +12,29 @@ const links = [
 ];
 ---
 
-<footer id="contacto" class="mx-auto w-full max-w-7xl px-4 pt-24 pb-32 md:px-16">
-  <h2 class="mb-8 text-4xl font-bold tracking-tight md:text-6xl">{i18n.CONTACT_TITLE}</h2>
-  <ul class="flex flex-wrap gap-3">
-    {
-      links.map(({ href, label, Icon }) => (
-        <li>
-          <a
-            href={href}
-            target={href.startsWith("http") ? "_blank" : undefined}
-            rel="noopener noreferrer"
-            class="flex min-h-11 items-center gap-2 rounded-full border border-white/15 px-5 py-2.5 text-muted transition hover:border-ember hover:text-paper"
-          >
-            <Icon class="size-5" />
-            {label}
-          </a>
-        </li>
-      ))
-    }
-  </ul>
+<!-- Cierre con la paleta invertida, como la última slide de la serie: «a partir de ahora». -->
+<footer id="contacto" class="bg-ink px-4 pt-20 pb-32 text-white md:px-16">
+  <div class="mx-auto w-full max-w-6xl">
+    <p class="mb-4 font-mono text-sm text-[#aab3c8]">{i18n.CONTACT.EYEBROW}</p>
+    <h2 class="mb-10 text-4xl leading-tight font-black tracking-[-0.03em] md:text-6xl">
+      {i18n.CONTACT.TITLE} <span class="hl">{i18n.CONTACT.HIGHLIGHT}</span>
+    </h2>
+    <ul class="flex flex-wrap gap-3">
+      {
+        links.map(({ href, label, Icon }) => (
+          <li>
+            <a
+              href={href}
+              target={href.startsWith("http") ? "_blank" : undefined}
+              rel="noopener noreferrer"
+              class="flex min-h-11 items-center gap-2 rounded-full border-2 border-white px-5 py-2.5 font-mono text-sm transition hover:bg-white hover:text-ink"
+            >
+              <Icon class="size-5" />
+              {label}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
 </footer>

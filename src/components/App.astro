@@ -1,46 +1,46 @@
 ---
+import { getCollection } from "astro:content";
 import Layout from "../layouts/Layout.astro";
 import Experience from "@components/Experience.astro";
-import GraphTour from "@components/GraphTour.astro";
+import Hero from "@components/Hero.astro";
+import Metodo from "@components/Metodo.astro";
 import StarCard from "@components/StarCard.astro";
-import { loadSky } from "../sky";
+import { geti18n } from "@i18n/index";
 
-const { i18n, constellations } = await loadSky(Astro.currentLocale);
+const lang = Astro.currentLocale === "es" ? "es" : "en";
+const i18n = geti18n({ currentLocale: Astro.currentLocale });
+// Cada archivo de src/content/estrellas es una tarjeta; las más destacadas primero.
+const cards = (await getCollection("estrellas"))
+  .sort((a, b) => b.data.brillo - a.data.brillo || a.id.localeCompare(b.id))
+  .map((entry) => ({ id: entry.id, ...entry.data, ...entry.data[lang] }));
 ---
 
 <Layout
   title={i18n.SEO_TITLE}
   description={i18n.SEO_DESCRIPTION}
-  url="https://cristiand395.github.io/portfolio/"
+  url="https://cristiandavila.dev/"
 >
   <main>
-    <GraphTour />
+    <Hero />
+    <Metodo />
 
-    <section id="constelaciones" class="mx-auto w-full max-w-7xl px-4 pt-24 md:px-16">
-      <h2 class="mb-12 text-4xl font-bold tracking-tight md:text-5xl">{i18n.SKY.TITLE}</h2>
-      <div class="flex flex-col gap-16">
+    <section id="que-hago" class="mx-auto w-full max-w-6xl px-4 pt-24 md:px-16">
+      <p class="mb-3 font-mono text-sm text-muted">{i18n.WHAT.EYEBROW}</p>
+      <h2 class="mb-10 text-4xl font-black tracking-[-0.03em] md:text-5xl">{i18n.WHAT.TITLE}</h2>
+      <ul class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {
-          constellations.map((c) => (
-            <div>
-              <h3 class="mb-2 font-mono text-sm tracking-[0.3em] uppercase" style={`color: ${c.color}`}>
-                {c.name}
-              </h3>
-              <p class="mb-6 max-w-2xl text-muted">{c.text}</p>
-              <ul class="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-                {c.stars.map((s) => (
-                  <li class="card">
-                    <StarCard {...s} color={c.color} typeLabel={i18n.SKY.TYPES[s.tipo]} linkLabel={i18n.SKY.LINK} />
-                  </li>
-                ))}
-              </ul>
-            </div>
+          cards.map((card) => (
+            <li class="card">
+              <StarCard {...card} typeLabel={i18n.WHAT.TYPES[card.tipo]} linkLabel={i18n.WHAT.LINK} />
+            </li>
           ))
         }
-      </div>
+      </ul>
     </section>
 
-    <section id="experiencia" class="mx-auto w-full max-w-7xl px-4 pt-24 md:px-16">
-      <h2 class="mb-10 text-4xl font-bold tracking-tight md:text-5xl">{i18n.EXPERIENCE_TITLE}</h2>
+    <section id="experiencia" class="mx-auto w-full max-w-6xl px-4 pt-24 pb-24 md:px-16">
+      <p class="mb-3 font-mono text-sm text-muted">{i18n.EXPERIENCE_EYEBROW}</p>
+      <h2 class="mb-10 text-4xl font-black tracking-[-0.03em] md:text-5xl">{i18n.EXPERIENCE_TITLE}</h2>
       <Experience />
     </section>
   </main>
@@ -58,7 +58,6 @@ const { i18n, constellations } = await loadSky(Astro.currentLocale);
     from {
       opacity: 0;
       translate: 0 60px;
-      scale: 0.96;
     }
   }
 </style>

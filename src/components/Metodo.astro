@@ -1,0 +1,132 @@
+---
+import Rail from "@components/Rail.astro";
+import { geti18n } from "@i18n/index";
+const i18n = geti18n({ currentLocale: Astro.currentLocale });
+const steps = i18n.STEPS;
+---
+
+<!-- El riel es el scroll: el riel se queda fijo, avanza paso a paso y la escena 3D cambia de forma. -->
+<section id="metodo" class="metodo relative">
+  <div class="stage sticky top-0 h-svh overflow-hidden" data-stage>
+    <div class="absolute top-20 left-1/2 w-[min(44rem,calc(100%-3rem))] -translate-x-1/2 md:top-24">
+      <Rail labels={steps.map((s) => s.LABEL)} current={0} interactive label={i18n.MENU.METHOD} />
+    </div>
+    <canvas
+      class="scene absolute inset-x-0 top-40 h-[42%] w-full md:inset-y-0 md:top-0 md:right-0 md:left-auto md:h-full md:w-1/2"
+      aria-hidden="true"></canvas>
+  </div>
+
+  <div class="pointer-events-none relative -mt-[100svh]">
+    {
+      steps.map((step, i) => (
+        <article
+          id={`paso-${i}`}
+          class="paso flex min-h-svh items-end px-4 pb-28 md:items-center md:px-16 md:pb-0"
+        >
+          <div class="mx-auto w-full max-w-6xl">
+            <div class="pointer-events-auto max-w-md rounded-2xl bg-sand/90 md:bg-transparent">
+              <p class="mb-3 font-mono text-sm text-muted">
+                {String(i + 1).padStart(2, "0")} · {step.LABEL}
+              </p>
+              <h2 class="mb-4 text-4xl leading-tight font-black tracking-[-0.03em] md:text-5xl">
+                {step.TITLE}
+              </h2>
+              <p class="text-lg leading-relaxed text-muted">{step.TEXT}</p>
+            </div>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  /* Línea de tiempo con nombre: el riel fijo la usa para rellenarse según el avance por la sección. */
+  .metodo {
+    view-timeline-name: --metodo;
+  }
+  .scene {
+    view-transition-name: escena;
+  }
+  @supports (animation-timeline: view()) {
+    .paso > div {
+      animation: paso-cross linear both;
+      animation-timeline: view();
+      animation-range: cover 0% cover 100%;
+    }
+  }
+  @keyframes paso-cross {
+    0% {
+      opacity: 0;
+      translate: 0 60px;
+    }
+    35%,
+    65% {
+      opacity: 1;
+      translate: 0 0;
+    }
+    100% {
+      opacity: 0;
+      translate: 0 -60px;
+    }
+  }
+</style>
+
+<script>
+  const section = document.getElementById("metodo");
+  const stage = section?.querySelector<HTMLElement>("[data-stage]");
+  const canvas = stage?.querySelector("canvas");
+  const nodes = [...(stage?.querySelectorAll<HTMLElement>(".rail-node") ?? [])];
+  const fill = stage?.querySelector<HTMLElement>(".rail-fill");
+
+  const getProgress = () => {
+    if (!section) return 0;
+    const rect = section.getBoundingClientRect();
+    return Math.min(Math.max(-rect.top / (rect.height - innerHeight), 0), 1);
+  };
+
+  // Marca el paso actual en el riel (la línea ya avanza sola con CSS; esto es para nodos y lectores de pantalla).
+  let current = -1;
+  const update = () => {
+    const progress = getProgress();
+    fill?.style.setProperty("--fill", String(progress));
+    const step = Math.round(progress * (nodes.length - 1));
+    if (step === current) return;
+    current = step;
+    nodes.forEach((node, i) => {
+      node.dataset.state = i < step ? "done" : i === step ? "current" : "pending";
+      const link = node.querySelector("a");
+      if (i === step) link?.setAttribute("aria-current", "step");
+      else link?.removeAttribute("aria-current");
+    });
+  };
+  addEventListener("scroll", update, { passive: true });
+  // Al entrar con un enlace a un paso (#paso-3), el navegador salta sin evento de scroll: se recalcula al cargar.
+  addEventListener("load", update);
+  addEventListener("hashchange", update);
+  update();
+
+  // Pulsar un nodo salta a su paso con una View Transition: la escena cambia de golpe y suave, sin un scroll largo.
+  nodes.forEach((node) =>
+    node.querySelector("a")?.addEventListener("click", (event) => {
+      const target = document.querySelector<HTMLElement>(node.querySelector("a")!.hash);
+      if (!target) return;
+      event.preventDefault();
+      const jump = () => {
+        target.scrollIntoView({ behavior: "instant" });
+        update();
+      };
+      if (document.startViewTransition) document.startViewTransition(jump);
+      else jump();
+    }),
+  );
+
+  if (canvas && document.createElement("canvas").getContext("webgl2")) {
+    const { mountMetodo } = await import("../scripts/metodo");
+    mountMetodo({
+      canvas,
+      getProgress,
+      reducedMotion: matchMedia("(prefers-reduced-motion: reduce)").matches,
+    });
+  }
+</script>

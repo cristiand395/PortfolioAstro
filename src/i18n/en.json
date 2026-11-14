@@ -1,26 +1,62 @@
 {
   "SEO_TITLE": "Cristian Davila · Agentic AI Architect",
-  "SEO_DESCRIPTION": "Cristian Davila portfolio: agents, integrations and MCP servers, told as a sky full of stars.",
+  "SEO_DESCRIPTION": "What breaks, fixed. What is new, done right. Agents, integrations and MCP servers with a measurable method.",
   "MENU": {
-    "SKY": "Home",
-    "CONSTELLATIONS": "What I do",
+    "METHOD": "Method",
+    "WHAT": "What I do",
     "EXPERIENCE": "Experience",
     "CONTACT": "Contact"
   },
   "HERO": {
-    "TITLE": "I orchestrate agents that get the work done.",
-    "DESCRIPTION": "I lead a development team and work on architecture, integrations, CI/CD and MCP servers. Every star in this sky is something I do, build or publish.",
-    "CTA": "Explore the sky",
-    "STARS": {
-      "one": "star",
-      "other": "stars"
-    },
-    "CONSTELLATIONS": {
-      "one": "constellation",
-      "other": "constellations"
-    }
+    "ROLE": "agentic AI architect",
+    "LINE1": "What breaks, fixed.",
+    "LINE2": "What is new,",
+    "HIGHLIGHT": "done right.",
+    "DESCRIPTION": "I lead a development team and connect AI agents to real systems: integrations, MCP servers and CI/CD, with security and numbers."
   },
-  "CONTACT_TITLE": "Let’s talk",
+  "STEPS": [
+    {
+      "LABEL": "problem or idea",
+      "TITLE": "Listen before proposing.",
+      "TEXT": "It all starts with something that slows the business down or an idea nobody has tried. First I find out what hurts and who it hurts."
+    },
+    {
+      "LABEL": "understand",
+      "TITLE": "Take it apart, piece by piece.",
+      "TEXT": "Code, data, processes and people. I audit before I touch anything, to know what breaks and why."
+    },
+    {
+      "LABEL": "build",
+      "TITLE": "Build what is needed.",
+      "TEXT": "Architecture, integrations, MCP servers and agents that work with real systems, with permissions and a human in the loop."
+    },
+    {
+      "LABEL": "measure",
+      "TITLE": "A number that proves it.",
+      "TEXT": "I define the metric that will say whether it works. Without a number there is no improvement, only opinions."
+    },
+    {
+      "LABEL": "in production",
+      "TITLE": "And keep it running.",
+      "TEXT": "CI/CD, review and security so it reaches production and stays there. Done right."
+    }
+  ],
+  "WHAT": {
+    "EYEBROW": "what I do",
+    "TITLE": "The craft behind the method",
+    "TYPES": {
+      "faceta": "craft",
+      "repo": "project",
+      "post": "post"
+    },
+    "LINK": "Open"
+  },
+  "EXPERIENCE_EYEBROW": "experience",
+  "CONTACT": {
+    "EYEBROW": "from now on",
+    "TITLE": "Shall we build what comes",
+    "HIGHLIGHT": "next?"
+  },
   "EXPERIENCE_TITLE": "Experience",
   "EXPERIENCE_DATA": [
     {
@@ -51,32 +87,5 @@
         "- Specify new features and functionalities."
       ]
     }
-  ],
-  "CONSTELLATIONS": [
-    {
-      "ID": "oficio",
-      "NAME": "Craft",
-      "TEXT": "What I do every day: lead a team, design integrations and connect language models to real systems."
-    },
-    {
-      "ID": "laboratorio",
-      "NAME": "Lab",
-      "TEXT": "What I build on my own at weekends, for the joy of understanding how things work."
-    },
-    {
-      "ID": "publicaciones",
-      "NAME": "Writing",
-      "TEXT": "What I share on LinkedIn: ideas, numbers and lessons from what I build."
-    }
-  ],
-  "SKY": {
-    "TITLE": "What I do",
-    "TYPES": {
-      "faceta": "Craft",
-      "repo": "Project",
-      "post": "Post"
-    },
-    "LINK": "Open",
-    "CLOSE": "Close"
-  }
+  ]
 }

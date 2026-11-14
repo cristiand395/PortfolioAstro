@@ -4,8 +4,8 @@ import { geti18n } from "@i18n/index";
 const { currentLocale } = Astro;
 const i18n = geti18n({ currentLocale });
 const links = [
-  { href: "#grafo", label: i18n.MENU.SKY },
-  { href: "#constelaciones", label: i18n.MENU.CONSTELLATIONS },
+  { href: "#metodo", label: i18n.MENU.METHOD },
+  { href: "#que-hago", label: i18n.MENU.WHAT },
   { href: "#experiencia", label: i18n.MENU.EXPERIENCE },
   { href: "#contacto", label: i18n.MENU.CONTACT },
 ];
@@ -14,21 +14,21 @@ const links = [
 <header id="header-nav" class="pointer-events-none fixed top-0 z-50 w-full px-4 py-4 md:px-16">
   <div class="mx-auto flex max-w-7xl items-center justify-between gap-4">
     <a
-      href="#grafo"
-      class="glass pointer-events-auto relative flex min-h-11 items-center rounded-full px-5 text-lg font-bold tracking-tight"
+      href="#inicio"
+      class="capsule pointer-events-auto flex min-h-11 items-center rounded-full px-5 text-lg font-black tracking-tight"
       >cristian davila</a
     >
     <LanguageSelector />
   </div>
 </header>
 
-<nav class="dock glass" aria-label={currentLocale === "es" ? "Menú" : "Menu"}>
+<nav class="dock" aria-label={currentLocale === "es" ? "Menú" : "Menu"}>
   <span class="lens" aria-hidden="true"></span>
   <ul>
     {
-      links.map((link, index) => (
+      links.map((link) => (
         <li>
-          <a href={link.href} aria-current={index === 0 ? "true" : "false"}>
+          <a href={link.href} aria-current="false">
             {link.label}
           </a>
         </li>
@@ -42,7 +42,7 @@ const links = [
     view-transition-name: site-header;
   }
 
-  /* Dock fijo abajo; el aspecto de cristal viene de la clase global .glass. */
+  /* Dock fijo abajo en tinta, como las slides finales de la serie; la sección activa en naranja. */
   .dock {
     view-transition-name: dock;
     position: fixed;
@@ -52,6 +52,8 @@ const links = [
     translate: -50% 0;
     padding: 6px;
     border-radius: 999px;
+    background: var(--color-ink);
+    box-shadow: 0 12px 32px -12px rgb(20 33 61 / 0.6);
   }
   .dock ul {
     position: relative;
@@ -65,17 +67,18 @@ const links = [
     padding: 0.6rem 0.7rem;
     font-size: 0.8rem;
     white-space: nowrap;
-    color: rgb(242 240 250 / 0.75);
+    color: rgb(255 255 255 / 0.8);
     transition:
       color 0.2s,
       scale 0.25s cubic-bezier(0.3, 1.5, 0.5, 1);
   }
   .dock a:hover {
-    color: var(--color-paper);
+    color: #fff;
     scale: 1.06;
   }
   .dock a[aria-current="true"] {
-    color: var(--color-paper);
+    color: var(--color-ink);
+    font-weight: 800;
     anchor-name: --dock-active;
   }
   @media (min-width: 640px) {
@@ -94,20 +97,22 @@ const links = [
     width: anchor-size(width);
     height: anchor-size(height);
     border-radius: 999px;
-    background: rgb(255 255 255 / 0.16);
-    box-shadow:
-      inset 0 1px 0 rgb(255 255 255 / 0.45),
-      inset 0 0 12px rgb(255 255 255 / 0.08);
+    background: var(--color-ember);
     transition:
+      opacity 0.3s,
       left 0.5s cubic-bezier(0.3, 1.3, 0.5, 1),
       width 0.5s cubic-bezier(0.3, 1.3, 0.5, 1);
+  }
+  /* En la portada no hay sección activa: la lente se esconde. */
+  .dock:not(:has([aria-current="true"])) .lens {
+    opacity: 0;
   }
   @supports not (anchor-name: --a) {
     .lens {
       display: none;
     }
     .dock a[aria-current="true"] {
-      background: rgb(255 255 255 / 0.16);
+      background: var(--color-ember);
     }
   }
 </style>
@@ -133,5 +138,8 @@ const links = [
     const section = document.querySelector(link.hash);
     if (section) observer.observe(section);
   });
+  // La portada también se observa: al volver arriba no queda ninguna sección marcada.
+  const hero = document.getElementById("inicio");
+  if (hero) observer.observe(hero);
   addEventListener("scroll", () => atBottom() && mark(last.hash), { passive: true });
 </script>
