@@ -24,6 +24,13 @@ const lang = Astro.currentLocale ?? "en";
     <link rel="canonical" href={url} />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
+    <!-- Umami Cloud: only counts visits on the production domains, not localhost or Vercel previews -->
+    <script
+      is:inline
+      defer
+      src="https://cloud.umami.is/script.js"
+      data-website-id="c7f2946b-11e0-43cf-9202-3c7f1f9bf755"
+      data-domains="www.cristiandavila.dev,cristiandavila.dev"></script>
   </head>
   <body class="min-h-svh">
     <div class="scroll-progress" aria-hidden="true"></div>
